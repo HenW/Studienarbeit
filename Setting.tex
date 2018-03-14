@@ -1,0 +1,172 @@
+\documentclass[a4paper,12pt,ngerman]{scrreprt}
+\usepackage[pdftitle={Studienarbeit Henning Wolf},colorlinks=true,linkcolor=blue,citecolor=blue,anchorcolor=blue,pagecolor=blue,plainpages=false,pdfpagelabels,backref=false]{hyperref}
+\usepackage[german]{babel}
+\usepackage{babelbib}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{lscape}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amstext}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{esint}
+\usepackage{amsthm}
+\usepackage{url}
+\usepackage{pifont}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[tight,footnotesize]{subfigure}
+\usepackage[percent]{overpic}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{tikz}
+\usepackage{framed}
+\usepackage{pdfpages}
+\usepackage{colortbl}
+\usepackage{float}
+%\usepackage {xcolor}
+\usepackage {xcolor}
+\usepackage{acronym}
+\usepackage[onehalfspacing]{setspace}
+\pagestyle{headings}
+\newcommand{\im}{{\rm Im}}
+\newcommand{\re}{{\rm Re}}
+\newcommand{\grad}{{\rm grad}}
+\newcommand{\dist}{{\rm dist}}
+\newcommand{\diam}{{\rm diam}}
+\newcommand{\const}{{\rm const}}
+\newcommand{\rang}{{\rm rang\,}}
+\newcommand{\Bild}{{\rm Bild}}
+\newcommand{\diag}{{\rm diag}}
+\newcommand{\graph}{{\rm graph\,}}
+\newcommand{\DD}{{\rm D}}
+\newcommand{\dd}{{\rm d}}
+\newcommand{\ds}{\displaystyle}
+\setlength{\parindent}{0em}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\ae}{{\"a}}
+\newcommand{\ue}{{\"u}}
+\renewcommand{\oe}{{\"o}}
+\newcommand{\Ae}{{\"A}}
+\newcommand{\Ue}{{\"U}}
+\newcommand{\Oe}{{\"O}}
+%\newcommand{\ss}{{"s}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calC}{\mathcal{C}}
+
+\numberwithin{equation}{chapter}
+
+\newtheoremstyle{style1}
+  {0.5cm}              %Space above
+  {0.5cm}              %Space below
+  {\itshape}                      %Body font: original {\normalfont}
+  {}                      %Indent amount (empty = no indent,%\parindent = paraindent)
+  {\normalfont\bfseries}  %Thm head font original
+  {}{\newline}
+  {{\normalfont\bfseries \thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}}
+\theoremstyle{style1}
+%-----------------------------
+\newtheorem{Sa}{Satz}[chapter]
+\newtheorem{Ko}[Sa]{Folgerung}
+
+\newtheoremstyle{style2}
+  {0.5cm}
+  {0.5cm}
+  {}
+  {}
+  {\normalfont\bfseries}
+  {}{\newline}
+  {{\normalfont\bfseries \thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}}
+\theoremstyle{style2}
+\newtheorem{Def}[Sa]{Definition}
+%\newtheorem*{Bsp}{Beispiel}
+%\newtheorem*{Bspe}{Beispiele}
+\newtheorem*{Bem}{Bemerkung}
+\newtheorem*{Bemm}{Bemerkungen}
+
+\newenvironment{Bsp}{\textbf{Beispiel.}\rmfamily }{\hspace{\fill} $\triangleleft$}
+\newenvironment{Bspe}{\textbf{Beispiele.}\rmfamily }{\hspace{\fill} $\triangleleft$}
+
+\newcommand{\lk}{\left \langle \,}
+\newcommand{\rk}{\, \right \rangle}
+
+\renewcommand{\footnoterule}{\vspace*{-3pt}\hrule height 0.4pt \vspace{2.6pt}}
+
+\long\def\symbolfootnote[#1]#2{\begingroup \def\thefootnote{\fnsymbol{footnote}}\footnote[#1]{#2}\endgroup}
+
+\newcommand{\V}[1]{\begin{pmatrix}#1\end{pmatrix}}
+\lstloadlanguages{Matlab}
+\lstnewenvironment{MatlabCode}[1][]
+{\microtypesetup{activate=false}      %Captions im Programmcode
+	\lstset{
+		language= Matlab,
+		basicstyle=\ttfamily,                     %generell Schreibmaschinenschrift
+		basicstyle=\scriptsize,
+		keywordstyle=\color{darkblue},
+		commentstyle=\color{darkgreen},
+		stringstyle=\color{string},
+		backgroundcolor=\color{yellow},      %Hintergrundfarbe
+		showstringspaces=false,                  %In Strings keine Backspace zeichen breaklines=true,
+		captionpos=b,                                 %Beschriftungsposition
+		numbers   =   left,                              %links Zeilennummern
+		xleftmargin=.04\textwidth,
+		%frame=single,                                 %shadowbox, leftline, lines, topline, t, r, b, l
+		#1}
+}
+{}
+
+
+% Beweisumgebung neu definieren:
+\renewcommand\proof[1][\proofname]{
+ \par
+ \pushQED{\qed}
+ \normalfont  \topsep 0pt plus 0pt \relax
+ \trivlist
+ \item[\hskip\labelsep
+               \bfseries #1: ]\ignorespaces
+ }
+% % % % % % % % % % % % % % % % % % % % % % % % % % %
+\lstset{ %
+	language=Matlab,                % the language of the code
+	basicstyle=\footnotesize,           % the size of the fonts that are used for the code
+	numbers=left,                   % where to put the line-numbers
+	numberstyle=\tiny\color{black},  % the style that is used for the line-numbers
+	stepnumber=1,                   % the step between two line-numbers. If it's 1, each line
+	% will be numbered
+	numbersep=5pt,                  % how far the line-numbers are from the code
+	backgroundcolor=\color{white},      % choose the background color. You must add \usepackage{color}
+	showspaces=false,               % show spaces adding particular underscores
+	showstringspaces=false,         % underline spaces within strings
+	showtabs=false,                 % show tabs within strings adding particular underscores
+	frame=single,                   % adds a frame around the code
+	rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+	tabsize=2,                      % sets default tabsize to 2 spaces
+	captionpos=b,                   % sets the caption-position to bottom
+	breaklines=true,                % sets automatic line breaking
+	breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+	title=\lstname,                   % show the filename of files included with \lstinputlisting;
+	% also try caption instead of title
+	keywordstyle= \color{blue},          % keyword style
+	commentstyle=\color{dkgreen},       % comment style
+	stringstyle=\color{mauve},         % string literal style
+	escapeinside={\%*}{*)},            % if you want to add LaTeX within your code
+	morekeywords={*,...}               % if you want to add more keywords to the set
+}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{rot}{rgb}{0.75,0,0.26}
+\definecolor{grun}{rgb}{0.75,0.44,0}
+\definecolor{dgrun}{rgb}{0.0,0.44,0.42}

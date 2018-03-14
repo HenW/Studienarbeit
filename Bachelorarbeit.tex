@@ -1,0 +1,26 @@
+\input{Setting}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\include{Frontmatter}
+\include{AKV}
+\pagenumbering{arabic}
+% Hier geht's los!
+\include{Einleitung/Einleitung}
+\include{Hauptteil/Grundlagen}
+\include{Schluss/Schluss}
+%\include{Kapitel3}
+%\include{Kapitel4}
+%\include{Kapitel5}
+%\include{Kapitel5}
+%\include{Kapitel6}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix
+%\includepdf[pages=1]{Hauptteil/pmodgps_man1.pdf}
+\bibliographystyle{bababbrv-lf}
+\addcontentsline{toc}{chapter}{Literatur}
+\bibliography{Literatur}
+
+\end{document}
