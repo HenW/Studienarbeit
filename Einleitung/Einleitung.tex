@@ -1,54 +1,54 @@
-\chapter{Einleitung}\label{ch:einleitung}
-
-Die Technologieentwicklung, im speziellen die der Computer, kann auf eine rasante Entwicklung in den letzten
-Jahrzehnten zurückblicken. Jedoch ist diese Technik mittlerweile so hochentwickelt, dass es mit zunehmender Zeit
-schwieriger wird, die Bauteile noch schneller, kleiner und effizienter herzustellen, denn auch hier gibt es Grenzen.
-So liegt es an den Entwicklern neue Wege zu finden, um diese Beschränkungen zu umgehen. \\
-So kam es zur Entwicklung der \acp{fpga}, welche es nun ermöglichen sollten, komplexe Logikschaltungen
-rekonfigurierbar herzustellen, sodass diese jederzeit erneuert, verändert und damit den Gegebenheiten und
-Anforderungen angepasst werden konnten. Durch die Optimierung während der Laufzeit können Kosten gesenkt und
-Ressourcen geschont werden. Mittlerweile sind moderne \acp{fpga} mit genügend Recourcen ausgestattet um eine
-große Anzahl an Logikgattern zu berechnen und sind in der Lage komplexe Rechenoperationen durchzuführen.\\
-Genau diese Entwicklung nutzte die Professur für Technische Informatik an der
-Helmut-Schmidt-Universität / Universität Hamburg der Bundeswehr, um im Rahmen dieser ein eigenes
-System zu entwickeln und auf dem Gebiet zu forschen. Das dort genutzte \ac{prhs}-Framework ermöglicht es,
-eine Nachbildung von Rechnern auf vielen verschiedenen \ac{fpga}-Boards zu nutzen. Neben den
-verschiedenen Hardwaremodulen wird als Betriebssystem das sogenannte \ac{l4prhs} genutzt.
-
-\section{Ziel der Arbeit}\label{kap:zielderarbeit}
-
-Das Ziel dieser Arbeit ist es, dieses vorhandene System um zwei weitere Module zu erweitern und damit
-eine Positionsbestimmung mit dem \ac{prhs}-Framework zu ermöglichen. Diese Module sind zum einen
-ein \emph{Pmod \ac{gps}-Receiver} und zum anderen der On-Board Beschleunigungssensor des Nexys 4 DDR. Für die
-Umsetzung wird die Hardware mithilfe der Hardwarebeschreibungssprache \ac{vhdl} beschrieben und der Treiber für Linux
-in der Programmiersprache \emph{C}. Für die Nutzung und Steuerung der
-Sensoren werden, die im \ac{prhs}-Framework bereits vorhandenen, Schnittstellen genutzt und an die Anforderungen angepasst.
-
-\section{Struktur der Arbeit}\label{kap:strukturderarbeit}
-
-Zur Umsetzung des Zieles, wird die Arbeit wie folgt gegliedert.\\
-Zu Beginn der Arbeit werden im Kapitel~\ref{kap:grundlagen} die theoretischen Grundlagen vermittelt. Als
-Ausgangspunkt wird im Kapitel~\ref{kap:fpga} auf den Aufbau und die Funktionsweise von \acp{fpga} eingegangen,
-gefolgt von einer näheren Erklärung des \ac{prhs}-Framework in Kapitel~\ref{kap:prhs}. Die Kommunikation zwischen
-Peripheriegeräten und dem System findet über Schnittstellen statt (Kapitel~\ref{kap:schnittstellen}).
- Dies beinhaltet die im Rahmen dieser Arbeit genutzten Schnittstellen \ac{uart}, für den \ac{gps}-Receiver, in Kapitel~\ref{kap:uart}
-  und die \ac{spi}-Schnittstelle in Kapitel~\ref{kap:spi} für den Beschleunigungssensor ADXL362.
-Die technischen Daten und wichtige Informationen des genutzten \ac{gps}-Sensors werden in
-Kapitel~\ref{kap:gpsreceiver} erläutert, wobei im Unterkapitel~\ref{kap:gpsd} explizit auf den
-sogenannten \ac{gpsd} eingegangen wird. Im Kapitel~\ref{kap:accelerometer} werden die Funktionsweisen und
-Eigenschaften des Beschleunigungssensor ADXL362 dargestellt. Das Kapitel~\ref{kap:linux} erklärt grob die
-Funktionsweise eines Betriebssystems, wie hier anhand des Beispiels Linux. Hierbei gibt es zwei Unterkapitel.
-Das Kapitel~\ref{kap:treiber}, welches die wesentlichen Eigenschaften und Funktionsweisen
-eines Treibers erläutert und das Kapitel~\ref{kap:buildroot}. Dieses beschreibt ein Tool, welches zu Erzeugung
-eines Betriebssystems genutzt werden kann.\\
-Die praktische Implementierung in Kapitel~\ref{ch:praktischeImplementierung} gliedert sich in zwei Teile.
-Ein Teil davon besteht aus dem \ac{gps}-Sensor, dessen Hardwareanbindung in Kapitel~\ref{kap:gpssensor} näher
-erklärt wird und einer Beschreibung des Treibers in Kapitel~\ref{kap:gpstreiber}. Der zweite Teil von Kapitel~\ref{ch:praktischeImplementierung}
- beschäftigt sich mit der Anbindung des Beschleunigungssensors in Kapitel~\ref{kap:implementierungaccel}, welche wiederrum aus
-der Beschreibung der Hardwareanbindung in Kapitel~\ref{kap:accelimplementierung} und der des Treibers
-in Kapitel~\ref{kap:acceltreiber} besteht. \\
-Um nun die erarbeiteten Ergebnisse zu testen, wird in Kapitel~\ref{kap:erprobung} beschrieben, wie erst
-der \ac{gps}-Sensor in Kapitel~\ref{kap:gpserprobung} und der Beschleunigungssensor in Kapitel~\ref{kap:accelerprobung} getestet wird.
-Abschließend werden alle Module in einer Applikation zusammengefasst,
-welche in Kapitel~\ref{kap:applikation} beschrieben wird.\\
-Im Kapitel~\ref{ch:schluss} wird die Arbeit noch einmal zusammengefasst und ein Ausblick gegeben.\\
+% \chapter{Einleitung}\label{ch:einleitung}
+%
+% Die Technologieentwicklung, im speziellen die der Computer, kann auf eine rasante Entwicklung in den letzten
+% Jahrzehnten zurückblicken. Jedoch ist diese Technik mittlerweile so hochentwickelt, dass es mit zunehmender Zeit
+% schwieriger wird, die Bauteile noch schneller, kleiner und effizienter herzustellen, denn auch hier gibt es Grenzen.
+% So liegt es an den Entwicklern neue Wege zu finden, um diese Beschränkungen zu umgehen. \\
+% So kam es zur Entwicklung der \acp{fpga}, welche es nun ermöglichen sollten, komplexe Logikschaltungen
+% rekonfigurierbar herzustellen, sodass diese jederzeit erneuert, verändert und damit den Gegebenheiten und
+% Anforderungen angepasst werden konnten. Durch die Optimierung während der Laufzeit können Kosten gesenkt und
+% Ressourcen geschont werden. Mittlerweile sind moderne \acp{fpga} mit genügend Recourcen ausgestattet um eine
+% große Anzahl an Logikgattern zu berechnen und sind in der Lage komplexe Rechenoperationen durchzuführen.\\
+% Genau diese Entwicklung nutzte die Professur für Technische Informatik an der
+% Helmut-Schmidt-Universität / Universität Hamburg der Bundeswehr, um im Rahmen dieser ein eigenes
+% System zu entwickeln und auf dem Gebiet zu forschen. Das dort genutzte \ac{prhs}-Framework ermöglicht es,
+% eine Nachbildung von Rechnern auf vielen verschiedenen \ac{fpga}-Boards zu nutzen. Neben den
+% verschiedenen Hardwaremodulen wird als Betriebssystem das sogenannte \ac{l4prhs} genutzt.
+%
+% \section{Ziel der Arbeit}\label{kap:zielderarbeit}
+%
+% Das Ziel dieser Arbeit ist es, dieses vorhandene System um zwei weitere Module zu erweitern und damit
+% eine Positionsbestimmung mit dem \ac{prhs}-Framework zu ermöglichen. Diese Module sind zum einen
+% ein \emph{Pmod \ac{gps}-Receiver} und zum anderen der On-Board Beschleunigungssensor des Nexys 4 DDR. Für die
+% Umsetzung wird die Hardware mithilfe der Hardwarebeschreibungssprache \ac{vhdl} beschrieben und der Treiber für Linux
+% in der Programmiersprache \emph{C}. Für die Nutzung und Steuerung der
+% Sensoren werden, die im \ac{prhs}-Framework bereits vorhandenen, Schnittstellen genutzt und an die Anforderungen angepasst.
+%
+% \section{Struktur der Arbeit}\label{kap:strukturderarbeit}
+%
+% Zur Umsetzung des Zieles, wird die Arbeit wie folgt gegliedert.\\
+% Zu Beginn der Arbeit werden im Kapitel~\ref{kap:grundlagen} die theoretischen Grundlagen vermittelt. Als
+% Ausgangspunkt wird im Kapitel~\ref{kap:fpga} auf den Aufbau und die Funktionsweise von \acp{fpga} eingegangen,
+% gefolgt von einer näheren Erklärung des \ac{prhs}-Framework in Kapitel~\ref{kap:prhs}. Die Kommunikation zwischen
+% Peripheriegeräten und dem System findet über Schnittstellen statt (Kapitel~\ref{kap:schnittstellen}).
+%  Dies beinhaltet die im Rahmen dieser Arbeit genutzten Schnittstellen \ac{uart}, für den \ac{gps}-Receiver, in Kapitel~\ref{kap:uart}
+%   und die \ac{spi}-Schnittstelle in Kapitel~\ref{kap:spi} für den Beschleunigungssensor ADXL362.
+% Die technischen Daten und wichtige Informationen des genutzten \ac{gps}-Sensors werden in
+% Kapitel~\ref{kap:gpsreceiver} erläutert, wobei im Unterkapitel~\ref{kap:gpsd} explizit auf den
+% sogenannten \ac{gpsd} eingegangen wird. Im Kapitel~\ref{kap:accelerometer} werden die Funktionsweisen und
+% Eigenschaften des Beschleunigungssensor ADXL362 dargestellt. Das Kapitel~\ref{kap:linux} erklärt grob die
+% Funktionsweise eines Betriebssystems, wie hier anhand des Beispiels Linux. Hierbei gibt es zwei Unterkapitel.
+% Das Kapitel~\ref{kap:treiber}, welches die wesentlichen Eigenschaften und Funktionsweisen
+% eines Treibers erläutert und das Kapitel~\ref{kap:buildroot}. Dieses beschreibt ein Tool, welches zu Erzeugung
+% eines Betriebssystems genutzt werden kann.\\
+% Die praktische Implementierung in Kapitel~\ref{ch:praktischeImplementierung} gliedert sich in zwei Teile.
+% Ein Teil davon besteht aus dem \ac{gps}-Sensor, dessen Hardwareanbindung in Kapitel~\ref{kap:gpssensor} näher
+% erklärt wird und einer Beschreibung des Treibers in Kapitel~\ref{kap:gpstreiber}. Der zweite Teil von Kapitel~\ref{ch:praktischeImplementierung}
+%  beschäftigt sich mit der Anbindung des Beschleunigungssensors in Kapitel~\ref{kap:implementierungaccel}, welche wiederrum aus
+% der Beschreibung der Hardwareanbindung in Kapitel~\ref{kap:accelimplementierung} und der des Treibers
+% in Kapitel~\ref{kap:acceltreiber} besteht. \\
+% Um nun die erarbeiteten Ergebnisse zu testen, wird in Kapitel~\ref{kap:erprobung} beschrieben, wie erst
+% der \ac{gps}-Sensor in Kapitel~\ref{kap:gpserprobung} und der Beschleunigungssensor in Kapitel~\ref{kap:accelerprobung} getestet wird.
+% Abschließend werden alle Module in einer Applikation zusammengefasst,
+% welche in Kapitel~\ref{kap:applikation} beschrieben wird.\\
+% Im Kapitel~\ref{ch:schluss} wird die Arbeit noch einmal zusammengefasst und ein Ausblick gegeben.\\
