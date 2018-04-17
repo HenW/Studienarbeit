@@ -1,5 +1,53 @@
+\chapter{Grundlagen}\label{kap:Grundlagen}
+\newpage
+\section{Softcore-Prozessoren}\label{kap:softcoreprozessoren}
 
-\chapter{Soft Core Prozessoren}\label{kap:softcoreprozessoren}
+Ein Soft Core (engl. „Software-Kern“) ist ein Prozessor, Mikrocontroller oder ein Signalprozessor, welcher als virtuelle Einheit in einem \ac{fpga} oder \ac{asic} integriert wird.
+Dies bietet die Möglichkeit einem digitales Schaltungsdesign jeden beliebigen Prozessor hinzuzufügen. Umgesetzt wird dieser Vorgang im \ac{fpga} durch reine Anwenderlogik,
+welche dementsprechend konfiguriert werden muss.\\
+Das typische Anwendungsgebiet eines SoftCores ist die Lösung von komplizierten Aufgaben, mit denen klassische „State Machines“ überfordert sind oder die Effektivität
+ nicht mehr gegeben ist. Somit werden Softcores oftmals nachträglich in bestehende Designs eingefügt, wenn deren Umfang sich extrem vergrößert hat.\\
+
+\subsection{Vergleich SoftCores und HardCores}\label{kap:vergleich}
+Vorteile:
+\begin{itemize}
+   \item Flexible Anwendung: Das \ac{fpga} kann bei Bedarf mit einem SoftCore versehen werden, jedoch wird nicht von vorneherein Platz für einen HardCore verschwendet, welcher
+    dann letztendlich ungenutzt bleibt. Daraus ergeben sich deutliche Vorteile im Hinblick auf die Kosten.
+    \item Konfigurierbarkeit: Beim Softcore deutlich flexibler, da hier unter anderem die Größe der Datenpfade und die Anzahl der Zusatzmodule variiert werden kann.
+ \end{itemize}
+
+
+Nachteile:
+\begin{itemize}
+  \item SoftCores haben auf Grund ihrer Flexibilität einen deutlichen Geschwindigkeitsnachteil
+\end{itemize}
+
+\subsection{Typen}\label{kap:typen}
+Es gibt eine große Anzahl verschiedener SoftCores. Diese unterscheiden sich aber maßgeblich in der Größe der Datenpfade.
+Somit wird unterschieden zwischen 8-,16- und 32-Bit Systemen.\cite{softcore}\\
+
+
+\section{Memory Management Unit}\label{kap:mmu}
+
+Bei der \ac{mmu} handelt es sich um einen so genannten Coprozessor, welcher die Speicherverwaltung des Arbeitsspeichers übernimmt. Umgesetzt wird diese Verwaltung mit
+Hilfe von Paging, welches virtuelle Adressen auf physikalische Adressen abbildet. Der gesamte Speicher wird in einzelne Speicherbereiche unterteilt und dann von der
+\ac{mmu} den jeweiligen Prozessen zugeteilt. Ebenfalls überwacht Sie die Einhaltung dieser Bereiche und unterbricht gegebenenfalls Instruktionen, die auf einen verbotenen
+Bereich zugreifen wollen.\cite{itwissen}\\
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{Hauptteil/mmu.eps}
+\caption{Blockschaltbild einer MMU}\label{fig:mmu}
+\end{figure}
+
+
+
+
+
+
+
+
+\chapter{Soft Cores}\label{kap:softcores}
 \newpage
 \section{MicroBlaze}\label{kap:microblaze}
 
@@ -27,8 +75,7 @@ alle Bausteine für das Nexys4 DDR-Board angezeigt.\\
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{Hauptteil/schritt3.png}
-\caption{IP Integrator Block Design Diagram}
-\label{fig:mbschritt3}
+\caption{IP Integrator Block Design Diagram}\label{fig:mbschritt3}
 \end{figure}
 
 Schritt 4:
@@ -37,7 +84,7 @@ Durch doppeltes Klicken auf die Bausteine werden zunächst die „System Clock�
 Im Design Diagram kann nun über das „+“-Symbol der Microblaze und der „AXI Timer“ eingefügt werden.\\
 
 
-Schritt 5 :
+Schritt 5:
 
 
 Der „Clocking Wizard“ muss wie im folgenden Bild konfiguriert werden.
@@ -45,8 +92,7 @@ Der „Clocking Wizard“ muss wie im folgenden Bild konfiguriert werden.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{Hauptteil/Schritt5.png}
-\caption{Einstellungen des Clocking Wizard}
-\label{fig:mbschritt5}
+\caption{Einstellungen des Clocking Wizard}\label{fig:mbschritt5}
 \end{figure}
 
 Dabei wird eine zweite Output Clock auf 200MHz gesetzt, sowie der Reset Type auf „Active Low“.
@@ -59,8 +105,7 @@ Die bestehende Verbindung zwischen der SysClock und dem MIG muss gelöscht werde
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{Hauptteil/schritt6.png}
-\caption{Neue Verbindung zwischen ClkWiz und MIG7}
-\label{fig:mbschritt6}
+\caption{Neue Verbindung zwischen ClkWiz und MIG7}\label{fig:mbschritt6}
 \end{figure}
 
 
@@ -72,8 +117,7 @@ Besonders wichtig ist hier die Auswahl des Interrupt Controller.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{Hauptteil/schritt7.png}
-\caption{Einstellungen der Block Automation}
-\label{fig:mbschritt7}
+\caption{Einstellungen der Block Automation}\label{fig:mbschritt7}
 \end{figure}
 
 
@@ -88,19 +132,17 @@ Die Verbindungen sind im folgenden Bild orange gekennzeichnet.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{Hauptteil/Schritt8.png}
-\caption{Manuell erzeugte Verbindungen der Interruptleitungen}
-\label{fig:mbschritt8}
+\caption{Manuell erzeugte Verbindungen der Interruptleitungen}\label{fig:mbschritt8}
 \end{figure}
 
-Schritt 9 :
+Schritt 9:
 
 Der Microblaze ist wie folgt durch einen Doppelklick zu konfigurieren.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{Hauptteil/Schritt9.png}
-\caption{Konfiguration des MicroBlaze}
-\label{fig:mbschritt9}
+\caption{Konfiguration des MicroBlaze}\label{fig:mbschritt9}
 \end{figure}
 
 Die neuen Einstellungen werden durch das Klicken des OK-Buttons übernommen.\\
@@ -113,19 +155,18 @@ Diese Änderung ist mit OK zu bestätigen.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{Hauptteil/Schritt10.png}
-\caption{Änderung der Baudrate des AXI Uartlite}
-\label{fig:mbschritt10}
+\caption{Änderung der Baudrate des AXI Uartlite}\label{fig:mbschritt10}
 \end{figure}
 
 Schritt 11:
 
 Durch klicken der rechten Maustaste auf das Design im Source-Tab wird nun der HDL Wrapper erstellt.\\
 
-Schritt 12 :
+Schritt 12:
 
 Im nächsten Schritt wird das Bitfile generiert. Dafür ist im Flow Manager der Button „Generate Bitstream“ vorgesehen.
  Die „Number of jobs“ erhöht dabei die Geschwindigkeit je nach Prozessor und verfügbaren Kernen.\\
- Im Anschluss wird über File , Export , Export Hardware das generierte Bitstream für die SDK, welche als nächstes gestartet wird, nutzbar gemacht.\\
+ Im Anschluss wird über File -> Export -> Export Hardware das generierte Bitstream für die SDK, welche als nächstes gestartet wird, nutzbar gemacht.\\
 
 
 Schritt 13:
@@ -145,8 +186,7 @@ devicetree ausgewählt werden.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{Hauptteil/Schritt14.png}
-\caption{Erstellen eines Device-Tree als Board Support Package}
-\label{fig:mbschritt14}
+\caption{Erstellen eines Device-Tree als Board Support Package}\label{fig:mbschritt14}
 \end{figure}
 
 Das folgenden Fenster kann ohne Weiteres mit OK bestätigt werden.\\
@@ -162,8 +202,7 @@ Hierzu sind beide Dateien im Texteditor zu öffnen, um die \emph{.dts}
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{Hauptteil/Schritt15.png}
-\caption{Artix7.dts-Datei}
-\label{fig:mbschritt15}
+\caption{Artix7.dts-Datei}\label{fig:mbschritt15}
 \end{figure}
 
 \subsection{Erstellen des Linux Image}\label{kap:microblazelinux}
@@ -173,19 +212,19 @@ Hierzu sind beide Dateien im Texteditor zu öffnen, um die \emph{.dts}
 Schritt 1:
 
 Das bereits genannte Buildroot kann unter \url{https://buildroot.org/download.html} heruntergeladen werden.
-Das in meiner Arbeit verwendete Buildtool besitzt die Version 2018.02 .
+Das in meiner Arbeit verwendete Buildtool besitzt die Version 2018.02.
 Neben dem Buildroot werden Linux Kernel \emph{defonfig}-Dateien benötigt, welche von mir für das Nexys4 angepasst wurden und auf folgenden Github zur Verfügung stehen :
 
 \url{https://github.com/HenW/microblaze/tree/master}
 
-Die Dateien werden in das Verzeichnis \emph{/board/nexys/microblaze} kopiert, welche vorher neu angelegt werden müssen. Es ist wichtig zu beachten, dass die Basisadresse des Kernels als 0x80000000 gesetzt ist und gegebenenfalls angepasst werden muss.
+Die Dateien werden in das Verzeichnis \emph{/board/nexys/microblaze} kopiert, welche vorher neu angelegt werden müssen.
+ Es ist wichtig zu beachten, dass die Basisadresse des Kernels als 0x80000000 gesetzt ist und gegebenenfalls angepasst werden muss.
 
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{Hauptteil/Schritt16.png}
-\caption{Anpassung der \emph{defconf}-Dateien}
-\label{fig:mbschritt16}
+\caption{Anpassung der \emph{defconf}-Dateien}\label{fig:mbschritt16}
 \end{figure}
 
 Die im vorherigen Schritt erstellte .dts-Datei muss ebenfalls in das erstellte Verzeichnis eingefügt werden.
