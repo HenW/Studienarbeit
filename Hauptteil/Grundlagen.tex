@@ -40,6 +40,57 @@ Bereich zugreifen wollen.\cite{itwissen}\\
 \caption{Blockschaltbild einer MMU}\label{fig:mmu}
 \end{figure}
 
+\section{Interrupt}\label{kap:interrupt}
+Neben der \ac{cpu} und dem Datenspeicher haben die meisten Computersysteme Peripherie. Es handelt sich dabei um verbaute oder um an Schnittstellen angeschlossene Geräte.
+Damit die \ac{cpu} die Nachricht erhält, dass Daten an solch einer Schnittstelle beziehungsweise Verbindung anliegen, muss es eine Möglichkeit geben den Prozessor zu
+unterbrechen. Hier gibt es die Art des sogenannten Polling, bei dem der Prozessor alle vorhandenen Eingabegeräte zyklisch abfragt. Ein effektiveres Verfahren ist die
+Unterbrechungsanforderung (Interrupt), welche eintritt, wenn Daten anliegen. \\
+Sobald ein Gerät Daten zur Weiterverarbeitung besitzt, wird ein \ac{irq} auf der dafür vorgesehenen Interrupt-Leitung gesendet. Daraufhin unterbricht der Prozessor
+seine Arbeit und verarbeitet die Daten des Gerätes.\\
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{Hauptteil/irq.eps}
+\caption{Interrupt-Controller}\label{fig:irq}
+\end{figure}
+
+
+ \section{Peripherie}\label{kap:peripherie}
+ Ein Peripheriegerät kann einer Hardware hinzugefügt werden um die Fähigkeiten zu erweitern. Sie sind optional im Gegensatz zu der Hardware, welche in den vorherigen
+ Kapiteln beschrieben wurde.
+
+\subsection{UART}\label{kap:uart}
+
+Um mit Peripheriegeräten zu kommunizieren, kann \ac{uart} als serielle Schnittstelle genutzt.
+Bei dieser Art der Kommunikation werden serielle Daten zwischen dem Board (\emph{Master})
+und dem Empfänger (\emph{Slave}) ausgetauscht. Dabei spielen die TxD und die RxD-Datenleitungen
+eine wichtige Rolle, da der Datenaustausch über diese Leitungen realisiert wird.\\
+Im Gegensatz zu der \ac{spi}-Schnittstelle (~\ref{kap:spi}), wird kein Clock-Signal
+übertragen um Daten zu validieren. Des Weiteren wird die Verbindung mit einer definierten
+Geschwindigkeit realisiert, der sogenannten \emph{Baudrate}. \cite{uartpdf} \\
+Die Baudrate bezeichnet dabei die Anzahl der Bits, welche pro Sekunde übertragen werden.
+\ac{uart} konvertiert die Bytes in serielle Bits, überträgt diese über eine einzelne Leitung
+und liest die zugehörigen Start- und Stop-Bits aus.\\
+Das sogenannte \emph{Character}(Zeichen) besteht aus einer konfigurierbaren Anzahl an Datenbits (in den meisten
+Fällen 7 oder 8), aus einem \emph{low-level} Start-Bit , einem optionalen Parity-Bit und einem
+oder mehreren logischen \emph{high-level} Stop-Bits.\\
+Das Start-Bit teilt dem Receiver mit, dass ein neues \emph{Character} empfangen wird.
+Die nächsten Bits, je nachdem wie viele Daten-Bits vorher konfiguriert wurden , stellen
+dann den Inhalt des \emph{Character} dar. Darauf folgt das optionale Parity-Bit,
+welches anzeigt, ob die Anzahl der mit '\emph{1}' belegten Daten-Bits gerade oder
+ungerade ist. Am Ende der Folge stehen dann entweder ein oder zwei  \emph{high-level } Stop-Bits,
+welche dem Receiver eindeutig signalisieren, dass die Übertragung vollständig ist. Dadurch,
+dass das Start-Bit \emph{high-level} (1) und das Stop-Bit \emph{low-level} (0) ist,
+ist immer eine klare Abgrenzung zwischen dem derzeitigen und dem folgenden \emph{Character} möglich.\\
+
+Die Datenübertragung lässt sich nach~\ref{fig:uart} darstellen.\\
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\textwidth]{Hauptteil/uart.eps}
+\caption{Datenübertragung per \ac{uart} }
+\label{fig:uart}
+\end{figure}
 
 
 
