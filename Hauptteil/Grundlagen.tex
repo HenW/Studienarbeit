@@ -92,16 +92,214 @@ Die Datenübertragung lässt sich nach~\ref{fig:uart} darstellen.\\
 \label{fig:uart}
 \end{figure}
 
+\section{Compiler}\label{kap:compiler}
+
+Der Compiler ist ein Werkzeug, welches den Quelltext, der mit Hilfe einer höheren Programmiersprache (C++, C, Java) geschrieben wurde, in Maschinenbefehle umzusetzen. Damit der Prozessor diese Instruktionen ausführen kann, werden die lesbaren Programmierbefehle übersetzt. Nach dem so genannten kompilieren steht das Programm zur Ausführung bereit.
+Die Aufgaben des Compilers bestehen grundsätzlich aus drei Schritten:
+\begin{enumerate}
+  \item Lexikalische Analyse:
+  	Der Compiler zerlegt die Wörter und Zeichen des Quelltextes in verschiedene Klassen. Dabei werden überflüssige oder fehlende Zeichen als Fehler erkannt und vom Compiler, je nach
+  schwere des Verstoßes, als Warning oder Error ausgegeben.
+  \item Parsing:
+  	Es folgt die Prüfung des Codes auf syntaktische Korrektheit.
+  \item Semantische Analyse: Der Quelltext wird auf Sinnhaftigkeit geprüft. Zum Beispiel ob Befehle wirklich die korrekten Parameter haben.
+\end{enumerate}
+
+Vorteile:
+\begin{itemize}
+  \item effiziente Übersetzung in ausführbaren Code
+  \item Optimierung des generierten Codes
+\end{itemize}
+
+Nachteile:
+\begin{itemize}
+  \item Kompilieren benötigt Zeit und Ressourcen
+  \item Neu-Kompilierung nach Quelltextänderung
+  \item Jede Programmiersprache benötigt einen eigenen Compiler
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{Hauptteil/Compiler.eps}
+\caption{Funktionsweise des Compilers}\label{fig:compiler}
+\end{figure}
+
+\subsection{Compiler-Modes}\label{kap:compilermode}
+\begin{itemize}
+  \item Bare metal mode: Programme ohne Zugriff auf Ein- bzw. Ausgabegeräte. Programme, welche in diesem Modus ausgeführt werden, haben keine periphere Unterstützung
+        Der Bare-Metal-Mode wird meistens genutzt, um \ac{isa}- und Cache-Regressionstests durchzuführen. Hierbei entscheidet der Rückgabewert des Programmes über Erfolg bzw. Misserfolg
+        des Tests. \emph{0} bedeutet Erfolg, Zahlen ungleich \emph{0} geben den jeweiligen Fehlercode an. Bare-Metal-kompilierte Programm laufen auf einem \ac{fpga} un in einer Simulation
+        im Hintergrund.
+  \item Newlib mode: Programme mit Zugriff auf Ein- bzw. Ausgaberäte. Programme besitzen die Kontrolle der Peripheriegeräte, sind jedoch single-threaded. Ein Beispiel
+  für ein Programm, welches in diesem Modus kompiliert wird sind Bootloader.
+  \item Linux mode: Benutzerprogramme mit Linux-Unterstützung. Mit Hilfe dieser Programme lassen sich Verhaltssimulationen auf dem \ac{fpga}-Board durchführen. Diese Programme
+  erhalten Multi-Thread und Peripherie-Unterstützung vom Linux-Kernel\cite{lowrisc}\\
+\end{itemize}
 
 
 
 
+\section{Linux}\label{kap:linux}
 
+
+Das verwendete System Linux wurde als freies Betriebssystem von Linus Benedict Torvald entwickelt.
+Es basiert auf dem Unix-Modell, jedoch schrieb Torvald den sogenannten Kernel neu. Seit dem gilt
+Linux als Open-Source-Projekt und Entwickler versuchen stetig das System zu verbessern.\cite{linux}\\
+Die wohl wichtigste Eigenschaft die Linux bzw. Unix für den Einsatz beliebt machen ist die Portabilität,
+da es weitestgehend rechnerunabhängig läuft. Weitere Eigenschaften die das Betriebssystem zu einem der
+ weitverbreitetsten Systeme überhaupt gemacht haben, sind:\\\cite{linux}\\
+\begin{itemize}
+\item  \textbf{Multi-Tasking} Das parallele Nutzen verschiedener Programme erlaubt jedem Benutzer
+        gleichzeitige Aktionen durchzuführen, ohne auf den Abschluss der letzten Tätigkeit zu warten.
+\item  \textbf{Time-Sharing} Das Priorisieren von einzelnen Prozessen erlaubt es, dass mehrere
+        Prozesse gleichzeitig ablaufen, indem abwechselnd Platz im Hauptspeicher beziehungsweise in der \ac{cpu}
+        zugewiesen wird.
+\item \textbf{Sprachenvielfalt} Neben der Sprache C stellt Linux/Unix viele Programmiersprachen
+      wie C++, Java, Python und viele mehr zur Verfügung. Dadurch, dass es sich um ein Open-Source-Projekt handelt,
+      wird diese Bibliothek, je nach System, ständig erweitert.
+\item \textbf{Grafische Benutzeroberfläche} Linuxrechner, im speziellen die Anwendungen, nutzen in
+      den meisten Fällen \ac{gnome} oder \ac{kde} als grafische Oberfläche. Durch die weitverbreitete Nutzung
+      dieser Oberflächen wurden diese kontinuierlich weiterentwickelt und bieten so eine hohe Vielfalt an
+      Anpassungsmöglichkeiten.
+\item \textbf{Netzwerk} Für die Kommunikation zwischen Server und Client hat sich das Betriebssystem bewährt,
+      da es über ein umfangreiches Paket an Software verfügt. Neben den Standardprotokollen \ac{tcpip} (IPv6 wird
+      ebenfalls unterstützt), werden weitere Formate verwendet, wie zum Beispiel \ac{uucp}, welches eine simple Form
+      der Kommunikation zwischen Linux/Unix-Rechnern darstellt.
+\end{itemize}
+
+Grundsätzliche bestehen Betriebssysteme wie Linux/Unix aus drei Hauptkomponenten.
+Der \textbf{Kern} (engl. \emph{Kernel}) bildet die grundlegenden Funktionen, wie
+zum Beispiel die Organisation und Verwaltung von Speicher, der Prozesse, sowie
+Ein- und Ausgänge und sämtliche Kommunikationsaufgaben.\\
+Das \textbf{Dateisystem} (engl. \emph{File System}) ermöglicht das Speichern von Dateien
+und errichtet einen Dateibaum und ist somit für die Datenorganisation zuständig.\\
+Die dritte Komponente stellt der \textbf{Befehlsübersetzer} dar (engl. \emph{shell}),
+welcher anhand einer Befehlssprache die Kommunikation ermöglicht und dem Benutzer erlaubt
+mit sämtlichen Peripheriegeräten zu interagieren, ohne dass die im Hintergrund laufenden
+Prozesse berücksichtigt werden müssen. \cite{ubuntu}\\
+
+Grafisch lässt sich der Aufbau wie folgt darstellen:\\
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\textwidth]{Hauptteil/bs.eps}
+\caption{Aufbau der einzelnen Komponenten nach \cite{mbs}}
+\label{fig:mbs}
+\end{figure}
+
+Um nun mit den verschiedenen Geräten über eine Vielzahl von Schnittstellen kommunizieren
+zu können, benötigt jedes Gerät einen eigenen Treiber. Dieser Treiber ist im Betriebssystem
+als \emph{„Wissen“} hinterlegt und beinhaltet Information über das Gerät und dessen
+Zugriffsmöglichkeiten und wird im folgenden Unterkapitel näher erklärt. \cite{treiber}\\
+Der Anwender hat nun die Möglichkeit über die Treiber auf die Schnittstellen zuzugreifen, in dem diese vom
+Treiber gesteuert werden. Die in dieser Arbeit genutzten Schnittstellen (UART, SPI) werden in den
+Kapiteln~\ref{kap:uart} und~\ref{kap:spi} näher beschrieben.
+
+\subsection{Treiber}\label{kap:treiber}
+
+Der Treiber gilt als \emph{„Lexikon“} der jeweiligen Geräte für das Betriebssystem.
+Diese Aufgabe ist enorm wichtig für ein funktionierendes System, sodass der Stellenwert
+eines Treibers sehr hoch ist. Einfach erklärt, besteht ein Treiber aus einer Reihe von
+Funktionen, die den Zugriff auf das Gerät steuern und so eine Kommunikation ermöglichen.
+So muss für jedes Gerät ein eigener Treiber implementiert werden, der die offene
+Schnittstelle im Betriebssystemkern füllt. \\
+Dabei sind zwei Begrifflichkeiten wichtig, in die der Speicherbereich aufgeteilt wird:
+\begin{itemize}
+\item \textbf{Kernelspace} : Diese Bereich wird ausschließlich vom Kernel benutzt
+\item \textbf{Userspace} : Dieser Speicher wird von Applikationen genutzt und kann nicht,
+                          oder in Ausnahmfällen, nur eingeschränkt vom Kernel genutzt werden
+\end{itemize}
+
+Die Treiber werden grundsätzlich mit in den Kernel kompiliert oder sind als Modul dynamisch
+angelegt, um zum Kernel, während der Laufzeit, hinzugefügt zu werden. \cite{treiberbib}\\
+
+Bei der Implementierung von Gerätetreibern wird zwischen drei Gerätetypen unterschieden (\cite{treiberbib}):\\
+\begin{enumerate}
+\item \textbf{Character-Devices} Auf diese Geräte kann wie auf einen Stream von Bytes zugegriffen werden, indem
+      \ac{posix}-Funktionen genutzt werden, wie beispielsweise \emph{open()},\emph{write()},\emph{read()} oder \emph{close()}.
+      Für die Nutzung wird für jedes Gerät eine \emph{Gerätedatei} (vgl. \emph{device nodes}) angelegt.
+\item \textbf{Block Devices} Im Gegensatz zu den \emph{Character-Devices}, wird auf die \emph{Block-Devices} immer per Random Access zugegriffen.
+      Die Daten werden blockweise gelesen. Diese \emph{Block-Devices} können ein Dateisystem aufnehmen und gemountet werden.
+\item \textbf{Netzwerkschnittstellen} Netzwerkgeräte erhalten keine Gerätedatei, sondern sind in einer globalen Liste hinterlegt.
+      Der Datenaustausch findet immer asynchron statt, sodass die Netzwerkkarte jederzeit bereit sein muss Daten zu empfangen.
+\end{enumerate}
+
+
+\subsubsection{Device Tree}\label{kap:devicetree}
+
+
+Der \emph{Device-Tree} ersetzt beim \ac{arm}-Prozessor das, was beim normalen PC das \ac{bios} ist. Er beinhaltet
+Informationen, welche dem Kernel beim Booten helfen. Da das System angeschlossene Geräte nicht automatisch erkennen
+und die dazu passenden Treiber laden kann, geschieht das in dieser \emph{.dts}-Datei. Durch das Kompilieren wird daraus
+der sogennante \emph{Device} \emph{Tree} \emph{Blob}. Dieser wird zusammen mit dem Kernel vom Bootloader geladen und im
+Hauptspeicher abgelegt. Im Anschluss daran wird daraus eine Baumstruktur. In dieser sind die Geräte als Knoten angelegt
+und die dazugehörigen Treiber werden geladen. Die Verbindung zwischen Device-Tree und dem Treiber wird über eine
+eindeutige Identifikation per \emph{Compatible} festgelegt.
+
+
+\subsection{Buildroot}\label{kap:buildroot}
+
+\emph{Buildroot} ist ein Tool, welches das Erstellen eines kompletten Linux-Systems per
+\emph{Cross-Compiling} für eingebettete Systeme vereinfacht und automatisiert.  Neben dem
+\emph{cross-compiled} Toolchain können ebenfalls das \emph{Root}-Dateisystem, ein \emph{Linux-Kernel-Image}
+und ein \emph{Bootloader} für das Zielsystem erstellt werden.  In einem Konfigurationsprogramm lassen sich vor der
+Erstellung sämtliche Optionen und Erweiterungen ab- beziehungsweise anwählen. \\
+Das Tool wird größtenteils dafür genutzt, um die Systeme für andere Prozessoren, außer die klassischen x86-Prozessoren,
+zu erstellen, wie zum Beispiel \ac{arm}-Prozessoren.\\
+Der in Kapitel~\ref{kap:gpsd} näher beschriebene \ac{gpsd} lässt sich ebenfalls
+über das \emph{Buildroot}-Tool dem Gesamtsystem hinzufügen.\cite{buildroot}\\
 
 \chapter{Soft Cores}\label{kap:softcores}
 \newpage
 \section{MicroBlaze}\label{kap:microblaze}
+Microblaze
 
+Der MicroBlaze Softprozessor von Xilinx ist eine 32-Bit RISC Harvard Architektur mit einem umfangreichen Befehlssatz und ist optimiert für eingebettete Anwendungen.
+Neben dieser Flexibilität besitzt er drei Voreinstellungen:
+
+\begin{enumerate}
+  \item Microcontroller: Geeignet für Baremetall-Code
+        \begin{itemize}
+          \item 32-Bit Prozessorkern
+          \item Externer Speichercontroller
+          \item SPI Controller
+          \item I2C-Controller
+          \item UART
+          \item Interrupt-Controller
+          \item  Timer
+        \end{itemize}
+  \item Echtzeitprozessor: Deterministische Echtzeitverarbeitung auf einem RTOS
+    \begin{itemize}
+      \item Alle Microcontroller Preset Blöcke
+      \item Instructioncache
+      \item Speicherschutzeinheit
+      \item Datencache
+      \item DDR-Controller
+      \end{itemize}
+  \item Anwendungsprozessor: Embedded Linux-fähig
+        \begin{itemize}
+          \item Alle Echtzeit-Prozessor-Preset-Blöcke
+          \item 32-Bit-Prozessorkern
+          \item Speicherverwaltungseinheit
+          \item Ethernet-Controller
+        \end{itemize}
+\end{enumerate}
+
+Ausgehend von diesen Presets lässt sich das Design mit Hilfe von spezifischen Prozessoroptionen anpassen.
+ Diese Vielanzahl an Anpassungen sind per Drag \& Drop sehr einfach hinzuzufügen. Dazu zählen unter anderem UART-, PWM- und DMA-Bausteine, sowie serielle Schnittstellen.
+ Dadurch wird sichergestellt, dass die spezifischen Anforderungen der Anwendung erfüllt werden.
+
+Zusammengefasst besitzt der Microblaze folgende Schlüsselfähigkeiten:
+\begin{itemize}
+  \item 32-Bit-Befehlssatz und allgemeine Register
+  \item 32-Bit-Adressbus, welcher erweiterbar auf 64-Bit ist
+  \item Lockstep und TMP-fähig
+  \item Optionale FPU
+  \item Verschiedene Zustandsmodi (Sleep, Hibernate, Suspend Mode/Instrctions)
+  \item Unterstützt entweder PLB- oder AXI-Schnittstellen
+  \item Big-Endian / Little-endian Unterstützung
+  \item Optionale MMU
+\end{itemize}
 
 
 \subsection{Erstellen der Hardwarekonfiguration}\label{kap:microblazehardware}
