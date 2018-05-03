@@ -541,6 +541,193 @@ Hierzu muss innerhalb des Shells in den korrekten Ordner navigiert werden.
 das Image heruntergeladen werden.
 
 
+section{LEON3}\label{kap:leon3}
+
+Um diesen SoftCore zu erstellen, wird der LEON3/GRLIB Source Code benötigt welcher auf der Seite
+https://www.gaisler.com/index.php/downloads/ runtergeladen werden kann.
+Diese Datei kann in einen beliebigen Ordner entpackt werden.
+
+Für das hier verwendete Board Nexys4 DDR muss nun in einem Terminal in den Ordner:
+
+\begin{lstlisting}[caption={Pfad zu dem passenden Design},label={code:pfaddesign}]
+  ~/grlib-gpl-2017.3-b4208/designs/leon3-digilent-nexys4ddr
+   \end{lstlisting}
+
+navigiert werden.\\
+
+Mit Hilfe des Befehls
+\begin{lstlisting}[caption={Aufruf des Konfigurationsmenüs},label={code:xconfig}]
+make xconfig
+   \end{lstlisting}
+
+
+erscheint eine grafische Oberfläche, welche alle Parameter des Designs enthält.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\textwidth]{Hauptteil/xconfig.png}
+\caption{Grafische Oberfläche zur Konfiguration der Hardware}
+\label{fig:xconfig}
+\end{figure}
+
+Hier lassen sich nun sämtliche Einstellungen wie gewünscht verändern und anpassen.\\
+
+Zuerst muss der Prozessor angepasst werden. Hier ist es wichtig, dass bei dem Drop-down Menü „Force values from example configuration“ die Option
+
+„General-purpose-cfg“
+ausgewählt wird. Das Fenster kann geschlossen und die Oberfläche nach dem Speichern beendet werden, um das Menü anschließend erneut aufzurufen.
+Der gleiche Ablauf ist zu wiederholen, lediglich ist nun die Option
+„Custom-configuration“ auszuwählen, um weitere Einstellungen vorzunehmen.
+
+Durch die vorherigen Schritte wurde eine „Allzweck-Konfiguration“ vorgenommen, welche im Detail in der Tablle ... beschrieben ist.\\
+
+
+
+\begin{tabularx}{\textwidth}{|c|c|X|}
+  \hline
+  dsu & 1 & Unterstüzung der LEON3- Debug suport Unit(DSU)\\
+  \hline
+  fpu & - & Beinhaltet die \ac{fpu}. Diese ist für die Großzahl an Systemen dringend empfohlen.
+   Hierbei kann zwischen der GRFPU und der GRFPU ausgewählt werden. Diese unterscheiden sich in Geschwindigkeit und benötigter Flächenanforderung.\\
+  \hline
+  V8 & 2 & Unterstützung für SPRAC V8 MUL/DIV Instruktionen mit einer 5-Zyklen-Multiplikation. Bei geeigneter Zieltechnologie, benötigt eine Single-Zyklen-Multiplikation weniger Platz und bietet mehr Leistung\\
+  \hline
+  mac & 0 & Beinhaltet keine UNtersütztung für SPARC V8e signed multiply-accumulate(SMAC)/unsigned multiply-accumulate(UMAC)\\
+  \hline
+  nwp & 2 & Fügt zwei Hardware-Watchpoints hinzu\\
+  \hline
+  icen/dcen & 1 & Prozessor-Cache\\
+  \hline
+  isets/dsets & 2 & Zwei-Wege Instruktions- und Datencache\\
+  \hline
+  irepl/drepl & 2 & Zufällige Ersetzung für Befehl- und Datencache oder möglicher \ac{lru} Algorithmus\\
+  \hline
+  isetsize/dsetsize & - & Cachegröße, je nach Umgebung\\
+  \hline
+  dsnoop & 6 & Aktivieren des Snooping mit zusätzlichen physischen Tags\\
+  \hline
+  mmuen & 1 & Aktivieren der \ac{mmu}\\
+  \hline
+  itlbnum/dtlbnum & 8 & Jeweils acht Einträge für Look-a-Side-Puffer für Befehls- und Datentranslation der \ac{mmu}\\
+  \hline
+  tlb\_type & 2 & Nutzung von zwei separaten Look-a-Side Puffers mit schnellem Schreiben für Daten und Befehle\\
+  \hline
+  tlb\_rep & 0 & Nutzen von LRU für die \ac{tlb}\\
+  \hline
+  lddel & 1 & Ein-Zyklen Ladeverzögerung\\
+  \hline
+  tbuf & 4 & Nutzen von 4 KiB-Trace-Befehlpuffer\\
+  \hline
+  pwd & 2 & Timing-effiziente Power-Down Implementierung\\
+  \hline
+  smp & 0 & Deaktivierung der \ac{smp}-Unterstützung\\
+  \hline
+  bp & 1 & Aktivierung Verzweigungsprognose\\
+  \hline
+  \end{tabularx}\\\\
+
+
+Die getätigten Einstellungen ermöglichen es nun, mit Hilfe des Befehls:
+
+\begin{lstlisting}[caption={Aufruf des Vivado-Programm },label={code:vivado}]
+make vivado
+   \end{lstlisting}
+
+
+Die Synthese anzustoßen.
+
+
+
+Das erstellte Bitfile wird anschließend mittels des Hardwaremanagers von Vivado auf das Board geladen und gebootet.\\
+
+
+
+\subsection{Eigenschaften der Hardware}\label{kap:hardwareeigenschaften}
+
+
+Die Standardkonfiguration legt die Systemfrequenz auf 70MHz fest.\\
+
+Der verwendete DDR2SPA-Controller kann mit bis zu 150MHz getaktet werden. Die Standardkonfiguration legt diese Frequenz bei 140MHz fest. Um diesen DDR2SPA-Controller zu verwenden, muss dieser im \emph{xconfig}-Menü aktiviert werden und die Parameter mit folgenden Werten versehen werden:
+
+- Enable power-on initialization:       Yes\\
+- DDR clock is aligned to system clock: No\\
+- Memory Frequency:                     140 MHz\\
+- tRFC:                                 130 ns\\
+- Column address bits:                  10\\
+- Chip select bank size:                128 Mbyte\\
+- Data width:                           16\\
+
+
+Wenn der \ac{mig}-Controller aktiviert ist, läuft dieser mit einer Frequenz von 70 MHz und der DDR2-Speicher mit 280MHz.\\
+
+
+Die \ac{ahb}-Clock wird vom \ac{mmcm}-Modul in dem \ac{mig}-Controller generiert und kann mit Hilfe des Xilinx \ac{coregen} gesteuert werden.
+ Wenn der \ac{mig}-Controller nicht zur Verfügung steht, wird die \ac{ahb}-Clock von dem CLKGEN erstellt und via \emph{xconfig} kontrolliert.\\
+
+LED-Statusanzeige\\
+	-LED 0/1: zeigen USB-UART RX/TX Aktivitäten an.\\
+	-LED 2: \ac{dsu} Debug-Modus\\
+	-LED 3: zeigt den Prozessor im Fehlermodus an\\
+	-LED 4: stellt das Ende des Kalibrierungsvorganges für den Speichercontroller dar\\
+
+
+Die \ac{dsu}-Schnittstelle ist aktiviert und über den USB/UART-Port zugänglich.
+Für die Ausgabe wird empfohlen das Debugging-Tool von Gaisler zu benutzen, welches den Namen \emph{GRMON} trägt und auf der Herstellerseite kostenfrei heruntergeladen werden kann.\\
+
+Dieses Tool bietet verschiedene Aufrufparameter, welche in dem Manual näher beschrieben sind.\\
+
+In diesem Fall wird der \emph{GRMON} mit folgendem Aufruf gestartet:
+
+
+\begin{lstlisting}[caption={Aufruf des GRMON},label={code:grmon}]
+\.\/grmon \–baud 460800 \–uart \/dev\/ttyUSB1 \–u \–nb
+   \end{lstlisting}
+
+
+Erkärung der einzelnen Parameter:
+\begin{itemize}
+  \item baud \emph{baudrate}: Nutzen der angegebenen Baudrate. Die Standardeinstellung liegt bei 115200 baud. Höhere Baudraten benötigten eine entsprechende Unterstützung des Zielsystems.
+  \item uart \emph{device}: Standardmäßig nutzt der GRMON den ersten \ac{uart}-Port des Hostrechners. Diese Einstellung kann mit Hilfe der speziellen Angabe überschrieben werden und so sichergestellt werden, dass mit dem gewünschten Gerät kommuniziert wird.
+  \item u [device]: Dieser Befehl versetzt den UART1-Port in den FIFO-Debug Modus, wenn die Hardware es unterstützt. Ist dies nicht gegeben, wird der Loop-back-Modus aktiviert. Dieser Modus ermöglicht es via GRMON über den \ac{uart} zu kommunizieren.
+  \item nb: Das System soll bei sogenannten „Error Traps“ nicht anhalten.
+\end{itemize}
+
+Nach dem Start können durch den Befehl
+
+\begin{lstlisting}[caption={Abruf von Systeminformationen},label={code:infosys}]
+info sys
+   \end{lstlisting}
+
+Weitere Informationen zum System ausgegeben werden. Hierbei fällt auf, dass kein SDRAM gefunden wurde.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\textwidth]{Hauptteil/nosdram.png}
+\caption{Fehlender SDRAM}
+\label{fig:nosdram}
+\end{figure}
+
+Um dies zu beheben ist es nötig den Befehl
+
+\begin{lstlisting}[caption={Starten der Routine},label={code:ddr2delay}]
+ddr2delay scan
+   \end{lstlisting}
+Auszuführen.
+
+Dieses Kommando führt eine Kalibrierungsroutine aus, die alle \emph{tap}- und \emph{read}-Verzögerungen durchsucht, um so eine funktionierende Einstellungen herzustellen.\\
+
+Der \emph{GRMON} ist anschließend mit dem Befehl \emph{quit} zu beenden und erneut zu starten.
+
+Wiederholt man nun die Ausgabe der Systeminformationen, sollte SDRAM vorhanden sein.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\textwidth]{Hauptteil/sdram.png}
+\caption{Konfigurierter SDRAM}
+\label{fig:sdram}
+\end{figure}
+
+
 
 %
 %
