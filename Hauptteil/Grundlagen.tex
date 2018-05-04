@@ -305,38 +305,38 @@ Zusammengefasst besitzt der Microblaze folgende Schlüsselfähigkeiten:
 \subsection{Erstellen der Hardwarekonfiguration}\label{kap:microblazehardware}
 
 
-Schritt 1:
-Starten Sie Vivado und wählen Sie „New Project“ aus.
-Hierbei wählt man „RTL Project“ als Projekttyp, wobei der Haken bei „ Do not specify sources at this time“ gesetzt sein sollte.\\
-
-Schritt 2:
-Nun gilt es unter dem Tab „Boards“ das korrekte Board auszuwählen, in meinem Fall war es das Nexys4 DDR.
-Anschließend klicken Sie auf „Finish“ und das Projekt wird erstellt.\\
+\textbf{Erstellen eines Projekts}\\\\
+Starten Sie Vivado und wählen Sie \emph{New Project} aus.
+Hierbei wählt man \emph{RTL Project} als Projekttyp, wobei der Haken bei \emph{"Do not specify sources at this time"} gesetzt sein sollte.\\
+Nun gilt es unter dem Tab \emph{Boards} das korrekte Board auszuwählen, in meinem Fall war es das Nexys4 DDR.
+Anschließend klicken Sie auf \emph{Finish} und das Projekt wird erstellt.\\
 
 
-Schritt3:
-
-Im Flow Navigator  auf der linken Seite wählt man nun „Create Block Design“ aus und
+\newpage
+\textbf{Erstellen des Block Designs}\\\\
+Im Flow Navigator  auf der linken Seite wählt man nun \emph{Create Block Design} aus und
  gibt diesem Design einen beliebigen Namen.
-Es öffnet sich das Block Design, bei dem der Tab „Board“ zu wählen ist. Hier werden nun
-alle Bausteine für das Nexys4 DDR-Board angezeigt.\\
+Es öffnet sich das Block Design, bei dem der Tab \emph{Board} zu wählen ist. Hier werden nun
+alle Bausteine für das Nexys4 DDR-Board angezeigt.\\\\
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\textwidth]{Hauptteil/schritt3.png}
+\includegraphics[width=0.4\textwidth]{Hauptteil/schritt3.png}
 \caption{IP Integrator Block Design Diagram}\label{fig:mbschritt3}
 \end{figure}
 
-Schritt 4:
-
-Durch doppeltes Klicken auf die Bausteine werden zunächst die „System Clock“, „USB UART“ und „DDR2 SDRAM“ hinzugefügt. Die folgenden Fenster werden jeweils mit OK bestätigt.
-Im Design Diagram kann nun über das „+“-Symbol der Microblaze und der „AXI Timer“ eingefügt werden.\\
+\vspace{10mm}
 
 
-Schritt 5:
+\textbf{Hinzufügen der Bausteine}\\\\
+Durch doppeltes Klicken auf die Bausteine werden zunächst die \emph{System Clock}, \emph{USB UART} und \emph{DDR2 SDRAM} hinzugefügt. Die folgenden Fenster werden jeweils mit OK bestätigt.
+Im Design Diagram kann nun über das „+“-Symbol der Microblaze und der \emph{AXI Timer} eingefügt werden.\\
 
+\newpage
+\textbf{Konfiguration des Clocking Wizard}\\\\
+Der \emph{Clocking Wizard} muss wie im folgenden Bild konfiguriert werden.\\
 
-Der „Clocking Wizard“ muss wie im folgenden Bild konfiguriert werden.
+\vspace{10mm}
 
 \begin{figure}[H]
 \centering
@@ -344,12 +344,15 @@ Der „Clocking Wizard“ muss wie im folgenden Bild konfiguriert werden.
 \caption{Einstellungen des Clocking Wizard}\label{fig:mbschritt5}
 \end{figure}
 
-Dabei wird eine zweite Output Clock auf 200MHz gesetzt, sowie der Reset Type auf „Active Low“.
+\vspace{10mm}
 
+Dabei wird eine zweite Output Clock auf 200MHz gesetzt, sowie der Reset Type auf „Active Low“.\\
 
-Schritt 6:
+\newpage
 
-Die bestehende Verbindung zwischen der SysClock und dem MIG muss gelöscht werden und eine neue zwischen dem Clocking Wizard und dem MIG erstellt werden.
+\textbf{Anpassung der bestehenden Verbindungen}\\
+
+Die bestehende Verbindung zwischen der SysClock und dem MIG muss gelöscht werden und eine neue zwischen dem Clocking Wizard und dem MIG erstellt werden.\\
 
 \begin{figure}[H]
 \centering
@@ -358,14 +361,14 @@ Die bestehende Verbindung zwischen der SysClock und dem MIG muss gelöscht werde
 \end{figure}
 
 
-Schritt 7:
+\textbf{Block Automation}\\
 
-Ab hier übernimmt zuerst die „Block Automation“, bei der die im nachfolgenden Bild angezeigten Einstellungen zu übernehmen sind.
+Ab hier übernimmt zuerst die \emph{Block Automation}, bei der die im nachfolgenden Bild angezeigten Einstellungen zu übernehmen sind.
 Besonders wichtig ist hier die Auswahl des Interrupt Controller.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\textwidth]{Hauptteil/schritt7.png}
+\includegraphics[width=0.6\textwidth]{Hauptteil/schritt7.png}
 \caption{Einstellungen der Block Automation}\label{fig:mbschritt7}
 \end{figure}
 
@@ -373,60 +376,75 @@ Besonders wichtig ist hier die Auswahl des Interrupt Controller.
 Im Anschluss wird die „Connection Automation“ gestartet und alle Bausteine ausgewählt.
 Durch die Schaltfläche „Regenerate Layout“ kann das Diagram neu angeordnet werden.\\
 
-Schritt 8:
+\textbf{Manuelle Verbindungen}\\
 
 Der angelegte Interrupt Controller ist mit einem Concat verbunden, auf dessen Eingänge manuell die Interruptleitungen des AXI Uartlite und des AXI Timers gelegt werden.
-Die Verbindungen sind im folgenden Bild orange gekennzeichnet.
+Die Verbindungen sind im folgenden Bild orange gekennzeichnet.\\\\
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\textwidth]{Hauptteil/Schritt8.png}
+\includegraphics[width=1\textwidth]{Hauptteil/Schritt8.png}
 \caption{Manuell erzeugte Verbindungen der Interruptleitungen}\label{fig:mbschritt8}
 \end{figure}
 
-Schritt 9:
+\newpage
 
-Der Microblaze ist wie folgt durch einen Doppelklick zu konfigurieren.
+\textbf{Microblaze Konfiguration}\\
+
+Der sogenannte MicroBlaze Configuration Wizard ermöglicht es, bereits voreingestellte Konfigurationen zu wählen.
+
+\begin{itemize}
+  \item Minimum Area: Minimaler MicroBlaze Core. Kein Cache und kein Debug
+  \item Maximum Performace: Maximale Leistung. Großer Cache und Debug
+  \item Maximum Frequency: Maximale Frequeny. Kein Cache und kein Debug mit wenigen Ausführungseinheiten
+  \item Linux with \ac{mmu}: Hohe Leistung, Linux-optimiert \ac{mmu} aktiviert, großer Cache und Debug
+  \item Low-end Linux with \ac{mmu}: Für low-end-Systeme, \ac{mmu} aktiviert, kleiner Cache und Debug
+  \item Typical: Kompromiss zwischen Leistung, Frequenz und Größe
+  \item Frequency Optimized: Bestmögliche Frequenz. \ac{mmu} aktiviert
+\end{itemize}
+
+  Der Microblaze ist wie folgt durch einen Doppelklick zu konfigurieren.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\textwidth]{Hauptteil/Schritt9.png}
+\includegraphics[width=0.65\textwidth]{Hauptteil/microkonf.png}
 \caption{Konfiguration des MicroBlaze}\label{fig:mbschritt9}
 \end{figure}
-
 Die neuen Einstellungen werden durch das Klicken des OK-Buttons übernommen.\\
 
-Schritt 10:
+\textbf{Anpassung des AXI Uartlite-Bausteins}\\
 
 Der AXI Uartlite-Baustein muss ebenfalls angepasst werden. Hierbei gilt es im Tab „IP Configuration“ die Baudrate auf 115200 anzupassen.
-Diese Änderung ist mit OK zu bestätigen.
+Diese Änderung ist mit OK zu bestätigen.\\
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\textwidth]{Hauptteil/Schritt10.png}
+\includegraphics[width=0.65\textwidth]{Hauptteil/Schritt10.png}
 \caption{Änderung der Baudrate des AXI Uartlite}\label{fig:mbschritt10}
 \end{figure}
 
-Schritt 11:
+\vspace{10mm}
+
+\textbf{Erstellen des HDL Wrappers}\\
 
 Durch klicken der rechten Maustaste auf das Design im Source-Tab wird nun der HDL Wrapper erstellt.\\
 
-Schritt 12:
+\textbf{Generierung des Bitfiles}\\
 
 Im nächsten Schritt wird das Bitfile generiert. Dafür ist im Flow Manager der Button „Generate Bitstream“ vorgesehen.
  Die „Number of jobs“ erhöht dabei die Geschwindigkeit je nach Prozessor und verfügbaren Kernen.\\
  Im Anschluss wird über File -> Export -> Export Hardware das generierte Bitstream für die SDK, welche als nächstes gestartet wird, nutzbar gemacht.\\
 
 
-Schritt 13:
+\textbf{Device Tree}\\
 
 Um den dazugehörigen Device Tree zu generieren, wird das Device-Tree
- Repository benötigt, welches aus dem Xilinx Github runtergeladen werden kann: https://github.com/Xilinx/device-tree-xlnx.git\\
+ Repository benötigt, welches aus dem Xilinx Github runtergeladen werden kann: \url{https://github.com/Xilinx/device-tree-xlnx.git}\\
 Nach dem Entpacken wird der Ordner nun im \ac{sdk} als Repository eingebunden.
  Dies geschieht über die Schaltfläche „Xilinx Tools“ beziehungsweise Repositories.
-  Hier kann nun der Pfad des Ordners nur für ein bestimmtes Projekt oder für alle Projekte hinterlegt werden.
+  Hier kann nun der Pfad des Ordners nur für ein bestimmtes Projekt oder für alle Projekte hinterlegt werden.\\
 
-Schritt 14:
+\textbf{Erzeugen des Board Support Packages}\\
 
 Das Erstellen des Device-Tree geschieht über „File“ und anschließend „New“ und „Board Support Package“.
 Dabei sollte nochmal die voreingestellten Parameter überprüft werden und als Board Support Package OS
@@ -441,27 +459,44 @@ devicetree ausgewählt werden.
 Das folgenden Fenster kann ohne Weiteres mit OK bestätigt werden.\\
 
 
-Schritt 15:
+\textbf{Zusammenführung der \emph{Device Tree Source}-Dateien}\\
 
 Die entstandenen \emph{.dtsi} beziehungsweise \emph{.dts}-Dateien müssen gemerged werden und in einer \emph{.dts}-Datei gespeichert werden.
 Hierzu sind beide Dateien im Texteditor zu öffnen, um die \emph{.dts}
  in die \emph{.dtsi}-Datei zu kopieren.
- Die resultierende Datei wird, wie bereits erwähnt, als alleinstehende \emph{.dts}-Datei gespeichert, um später in das buildroot-Tool eingefügt zu werden.
+ Die resultierende Datei wird, wie bereits erwähnt, als alleinstehende \emph{.dts}-Datei gespeichert, um später in das buildroot-Tool eingefügt zu werden.\\
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.8\textwidth]{Hauptteil/Schritt15.png}
-\caption{Artix7.dts-Datei}\label{fig:mbschritt15}
-\end{figure}
+ \begin{lstlisting}[caption={Artix7.dts-Datei},label={code:artixdts}]
+ /dts-v1/;
+ / {
+  #address-cells = <1>;
+  #size-cells = <1>;
+  compatible = "xlnx,microblaze";
+  model = "Xilinx MicroBlaze";
+  chosen {
+    bootargs = "console=ttyUL0,115200";
+    linux,stdout-path = &axi_uartlite_0;
+    stdout-path = &axi_uartlite_0;
+  };
+  aliases {
+    serial0 = &axi_uartlite_0;
+  };
+  memory {
+    device_type = "memory";
+    reg = <0x80000000 0x8000000>;
+  };
+  cpus {
+    #address-cells = <1>;
+    #cpus = <1>;
+    #size-cells = <0>;
+    microblaze_0: cpu@0 {
+  \end{lstlisting}
 
-\subsection{Erstellen des Linux Image}\label{kap:microblazelinux}
 
-
-
-Schritt 1:
+\textbf{Buildroot}\\
 
 Das bereits genannte Buildroot kann unter \url{https://buildroot.org/download.html} heruntergeladen werden.
-Das in meiner Arbeit verwendete Buildtool besitzt die Version 2018.02.
+Das in meiner Arbeit verwendete Buildtool besitzt die Version 2018.02.\\
 Neben dem Buildroot werden Linux Kernel \emph{defonfig}-Dateien benötigt, welche von mir für das Nexys4 angepasst wurden und auf folgenden Github zur Verfügung stehen :
 
 \url{https://github.com/HenW/microblaze/tree/master}
@@ -469,49 +504,44 @@ Neben dem Buildroot werden Linux Kernel \emph{defonfig}-Dateien benötigt, welch
 Die Dateien werden in das Verzeichnis \emph{/board/nexys/microblaze} kopiert, welche vorher neu angelegt werden müssen.
  Es ist wichtig zu beachten, dass die Basisadresse des Kernels als 0x80000000 gesetzt ist und gegebenenfalls angepasst werden muss.
 
+Die im vorherigen Schritt erstellte \emph{.dts}-Datei muss ebenfalls in das erstellte Verzeichnis eingefügt werden.\\
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.8\textwidth]{Hauptteil/Schritt16.png}
-\caption{Anpassung der \emph{defconf}-Dateien}\label{fig:mbschritt16}
-\end{figure}
+Des weiteren muss die Buildroot defconfig-Datei „nexys\_microblaze\_defconfig“ im \emph{configs}-Ordner abgelegt werden.\\
 
-Die im vorherigen Schritt erstellte .dts-Datei muss ebenfalls in das erstellte Verzeichnis eingefügt werden.
-Die Buildroot defconfig-Datei „nexys\_microblaze\_defconfig“ muss im \emph{configs}-Ordner abgelegt werden.
-
-Schritt 2:
+\textbf{Einrichten der Konfigurationsdatei}\\
 
 Nachdem das System, wie in der vorherigen Schritt beschrieben,
-vorbereitet wurde, muss nun folgender Befehl mit Hilfe eines Terminals im Buildroot-Verzeichnis ausgeführt werden:
+vorbereitet wurde, muss nun folgender Befehl mit Hilfe eines Terminals im Buildroot-Verzeichnis ausgeführt werden:\\
 
 \begin{lstlisting}[caption={Generierung der \emph{defconf}-Datei},label={code:mbdefconf}]
   make nexys_microblaze_defconfig
  \end{lstlisting}
 
 
-Dieser Befehl erzeugt eine sogenannte .config Datei für das zugehörige buildroot.
+Dieser Befehl erzeugt eine sogenannte .config Datei für das zugehörige buildroot.\\
 
-Schritt 3:
+\textbf{Erzeugen des Kernels}\\
 
-Um den Kernel und das passende Filesystem zu erstellen, wird der Befehl
+Um den Kernel und das passende Filesystem zu erstellen, wird der Befehl \emph{make} benötigt.\\
 
 \begin{lstlisting}[caption={Erstellung des Kernels},label={code:mbkernel}]
   make
    \end{lstlisting}
 
-benötigt. Dieser Vorgang benötigt je nach Rechenleistung einige Minuten.
+Dieser Vorgang benötigt je nach Rechenleistung einige Minuten.
 Nach erfolgreichem Abschluss des Vorgangs wird eine „simpleImage.artix7“-Datei erstellt,
 welche zum booten des Linux auf dem Nexys4 DDR Artix7 \ac{fpga} Modul benötigt wird.
 
 \subsection{Ausführen des Linux Images auf dem Artix7}\label{kap:mcausführenlinux}
 
 
-Das Linux Image muss jetzt in einen Ordner kopiert werden, welcher im Anschluss über
-die \ac{sdk} Shell leicht zu erreichen ist. Das \ac{FPGA}-Board wird nun mit dem Rechner über \ac{usb} verbunden und eingeschaltet.
- Über das Xilinx \ac{sdk} kann nun eine Verbindung über den korrekten Port mit der entsprechenden Baudrate (115200)
- hergestellt werden.
 
-Schritt 1:
+Das Linux Image muss jetzt in einen Ordner kopiert werden, welcher im Anschluss über
+die \ac{sdk} Shell leicht zu erreichen ist. Das \ac{fpga}-Board wird nun mit dem Rechner über \ac{usb} verbunden und eingeschaltet.
+ Über das Xilinx \ac{sdk} kann nun eine Verbindung über den korrekten Port mit der entsprechenden Baudrate (115200)
+ hergestellt werden.\\
+
+\textbf{Starten der \ac{xmd}-Engine}\\
 
 Um die Verbindung zu prüfen kann, nachdem das \ac{fpga}-Board programmiert wurde ein Hello World Programm ausgeführt werden. Andernfalls kann direkt im SDK über Xilinx Tools, beziehungsweise  „Launch Shell“ ein Terminal geöffnet werden.
 
@@ -522,7 +552,7 @@ Mit dem Befehl:
    \end{lstlisting}
 
 
-wird eine \ac{xmd} Engine gestartet.
+wird eine \ac{xmd} Engine gestartet.\\
 
 Anschließend wird über
 \begin{lstlisting}[caption={Herstellen der Verbindung zum \acl{mb}},label={code:mbtarget}]
@@ -539,15 +569,252 @@ Hierzu muss innerhalb des Shells in den korrekten Ordner navigiert werden.
    \end{lstlisting}
 
 das Image heruntergeladen werden.
+\newpage
+\section{lowRISC}\label{kap:lowrisc}
+
+\textbf{Installation der benötigten Tools}
+
+Um die RISC-V Tools erstellen zu können, werden verschiedene Pakete benötigt, welche vorher zu installieren sind.
+\begin{itemize}
+  \item autoconf: Produziert shell scripts zur automatischen Konfiguration von Software
+  \item automake: Tool zur Generierung von Makefile Dateien
+  \item autotools-dev: Erneuert die Infrastruktur für config-Dateien
+  \item libmpfr-dev: Mehrfach genaue Arithmetikbibliothek – Entwicklungswerkzeuge
+  \item libmps-dev: siehe libmpfr-dev
+  \item libgmp-dev: siehe libmpfr-dev
+  \item gawk: GNU-Projekt Implementierung der AWK Programmiersprache
+  \item build-essentials: Benötigte Pakete zur Kompilierung eines Pakets
+  \item bison: YACC-  kompatibeler Parser-Generator
+  \item flex: schneller lexical- Analysator Generator
+  \item texinfo: hypertextfähiges Dokumentationssystem
+  \item gperf: Hash-Funktionsgenerator
+  \item libncurses5-dev: Ncurses-Bibliotheken für Entwickler
+  \item libusb-1.0.-0: Programmbibliothek zum Schreiben und Lesen von USB-Geräten
+  \item libboost-dev: Boost C++ Bibliotheken
+  \item Git: Software zur Versionsverwaltung von Dateien
+\end{itemize}
 
 
-section{LEON3}\label{kap:leon3}
+\begin{lstlisting}[caption={Installation der benötigten RISC-V-Tools},label={code:riscvtools}]
+Sudo apt-get install autoconf automake autotools-dev curl \
+Libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison \
+Flex texinfo gperf libncurses5-dev libusb-1.0-0 libboost-dev \
+Git
+\end{lstlisting}
+
+
+\textbf{Download des lowRISC-Git-Repository}\\
+
+Hierbei ist es empfehlenswert, dass gesamte Repository zu klonen, statt einzelne Untermodule.\\
+
+\begin{lstlisting}[caption={Download des Repositories},label={code:riscrepository}]
+Cd ~/lowRISC/DIR
+#download des untether-v0.2-Branch
+git clone -b untether-v0.2 -recursive https://github.com/lowrisc/lowrisc-chip.git
+cd lowrisc-chip
+\end{lstlisting}
+
+
+\vspace{5mm}
+\textbf{Setzen der RISCV-Variablen}\\
+
+Um die passende Umgebung zu schaffen, müssen die Variablen gesetzt werden. Hierfür ist zu erst der \emph{TOP}-Pfad anzugeben:\\
+
+\begin{lstlisting}[caption={Setzen der TOP-Variable},label={code:topvariable}]
+export TOP=[Gesamter Pfad zu dem lowRISC-Verzeichnis]
+\end{lstlisting}
+
+
+
+Bevor nun das Setupskript \emph{lowrisc-chip/set\_riscv\_env.sh} ausgeführt wird, um die restlichen Variablen anzupassen, muss in diesem Skript das passende Board angegeben werden.
+Im Falle des verwendeten Boards Nexys4DDR wie folgt:\\
+
+\begin{lstlisting}[caption={Anpassung des Zielsystems},label={code:zielsystem}]
+[...]
+#choose the FPGA board (KC705 in default)
+export FPGA_BOARD=nexys4
+\end{lstlisting}
+
+
+Ausgeführt wird die angepasste Datei im Terminal mit:\\
+
+\begin{lstlisting}[caption={Umgebungsvariablen},label={code:umgebungsvariablen}]
+Source set_riscv_env.sh
+\end{lstlisting}
+
+Es gilt zu beachten, dass das Einrichten dieser Umgebung jeweils nur für das genutzte Terminal gilt. Wird ein neues beziehungsweise weiteres Terminal geöffnet, müssen vorherigen Schritte erneut ausgeführt werden.\\
+
+\textbf{Bauen des RISC-V Cross-Kompilierung-Tools}\\
+
+In dem Repository wurde ein Skript mitgeliefert, welches die meisten Tools für die Cross-Kompilierung und Spike vorbereitet.
+Dazu gilt es in den \emph{\$TOP/riscv-tools}-Ordner zu navigieren und das Skript
+auszuführen.\\
+
+\begin{lstlisting}[caption={Ausführen des \emph{build}-Skripts},label={code:buildskript}]
+./build.sh
+\end{lstlisting}
+
+
+
+Nach der erfolgreichen Kompilierung sollten der Cross-Compiler, sowie Spike zur Verfügung stehen. Geprüft werden kann dies mit:\\
+
+\begin{lstlisting}[caption={Überprüfung der Erreichbarkeit des Compilers},label={code:elfgcc}]
+Which riscv64-unknown-elf-gcc
+\end{lstlisting}
+
+
+\vspace{5mm}
+\textbf{Erstellen des Linux-Cross-Compilers}\\
+
+Neben dem RISCV-Cross-Compiler, welcher für das System an sich benutzt wird, wird ebenfalls ein Cross-Compiler für Programme, welche unter Linux ausgeführt werden sollen, benötigt.
+
+Hierfür werden lediglich die Variablen innerhalb der RISCV-Umgebung angepasst.\\
+
+\begin{lstlisting}[caption={Anpassung der RISCV-Umgebung},label={code:riscvumgebung},extendedchars=false]
+cd $TOP/riscv-tools/riscv-gnu-toolchain
+#wenn der Ordner "build" bereits existiert, kann der nächste Schritt ignoriert werden
+mkdir build
+cd build
+../configure –prefix=\$RISCV
+make –j(Anzahl Prozessorkerne) linux
+\end{lstlisting}
+
+\newpage
+Auch hier kann die Verfügbarkeit überprüft werden.\\
+
+\begin{lstlisting}[caption={Überprüfung der Erreichbarkeit des Linux-Compilers},label={code:linuxgcc}]
+which riscv64-unkown-linux-gnu-gcc
+\end{lstlisting}
+
+\vspace{5mm}
+
+ \textbf{Kompilieren des Linux Kernel}\\
+
+Für den Linux Kernel, welcher mit Hilfe von Spike simuliert oder auf dem FPGA-Board gebootet werden kann, muss ebenfalls die Umgebung angepasst werden.
+
+Es werden verschiedene Dateien benötigt, die unter den folgenden Verlinkungen heruntergeladen werden können.\\
+
+\begin{lstlisting}[caption={Download und Anpassung des Kernels},label={code:kernelkonf}]
+# Setzen der RISCV Umgebungsvariablen
+cd $TOP/riscv-tools
+curl https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.14.41.tar.xz \
+ | tar -xJ
+cd linux-3.14.41
+git init
+git remote add origin https://github.con/lowrisc/riscv-linux.git
+git fetch
+git checkout -f -t origin/untether-v0.2
+make ARCH=riscv defconfig
+make ARCH=riscv -j vmlinux
+\end{lstlisting}
+
+\vspace{10mm}
+
+Nach der Kompilierung sollte das Linux Kernel Image erreichbar sein.\\
+
+\begin{lstlisting}[caption={Erreichbarkeit des Kernel-Images},label={code:kernelimage}]
+ls -l vmlinux
+\end{lstlisting}
+
+\newpage
+\textbf{BusyBox}\\
+
+BusyBox wird im Root-Image genutzt um die grundlegende Shell-Umgebung bereitzustellen. Um ein eigenes Image zu erstellen, muss die BusyBox-Binärdatei vorher generiert werden.\\
+
+\begin{lstlisting}[caption={Download der BusyBox},label={code:dowbusybox},extendedchars=false]
+# Setzen der RISCV Umgebungsvariablen
+cd $TOP/riscv-tools
+curl -L http://busybox-net/downloads/busybox-1.21.1.tar.bz2 | tar -xJ
+cd busybox-1.21.1
+cp $TOP/risscv-tools/busybox_config .config
+make -j(Anzahl Prozessorkerne)
+\end{lstlisting}
+
+
+Wurde die Kompilierung erfolgreich abgeschlossen, wurde die Binärdatei im selben Verzeichnis generiert.\\
+
+\begin{lstlisting}[caption={BusyBox},label={code:busybox}]
+ls -l busybox
+\end{lstlisting}
+
+Mit Hilfe des \emph{make\_root}-Skripts kann das Root-Image (root.bin) erstellt werden:\\
+
+
+\begin{lstlisting}[caption={Generieren des Root-Image},label={code:rootimage}]
+$TOP/riscv-tools/make_root.sh
+\end{lstlisting}
+
+\textbf{FPGA-Demo}\\
+
+Um nun das FPGA-Projekt zu kompilieren wird die Bitstream-Datei mit Hilfe eines Skripts erstellt.\\
+
+\begin{lstlisting}[caption={Erzeugen des Bitfiles},label={code:bitfile}]
+cd $TOP/fpga/board/nexys4
+make bitstream
+\end{lstlisting}
+
+
+Die Bitstream-Datei ist anschließend unter dem Pfad \emph{lowrisc-chip-imp/lowrisc-chip-imp.runs/impl\_1/chip\_top.bit} zu finden.\\
+
+\textbf{Kompilieren und Ausführen von Bare-Metal-Beispielen}\\
+
+In dem \emph{lowrisc}-Verzeichnis sind bereits vier Bare-Metal Beispiele hinterlegt. Mit Hilfe einfacher Skripte können diese kompiliert werden und die neue Bitstream-Datei generiert werden.
+Für das klassische Hello-World Programm ist folgender Aufruf notwendig:\\
+
+\begin{lstlisting}[caption={Erzeugen und kompilieren eines Beispielprogrammes},label={code:helloworld}]
+cd $TOP/fpga/board/nexys4
+Make hello
+\end{lstlisting}
+
+
+Anschließend befindet sich im Verzeichnis \emph{lowrisc-chip-imp/lowrisc-chip-imp.runs/impl\_1} eine \emph{chip\_top.new.bit}-Datei, welche auch zum konfigurieren des FPGA genutzt werden sollte.
+Mit Hilfe von Vivado kann der FPGA mit der Bitstrea-Datei programmiert werden.
+
+Der \emph{Minicom} wird genutzt um die \ac{uart}-Schnittstelle zu testen.\\
+
+\begin{lstlisting}[caption={Aufruf des \emph{Minicom}},label={code:minicom}]
+minicom -D /dev/(passende USB-Schnittstelle)
+\end{lstlisting}
+
+
+Nun sollte als Ausgabe Hello World erscheinen.\\
+
+\textbf{Vorbereiten des eigenen Images}\\
+
+Um RISC-V Linux zu starten, werden drei Dateien auf der SD-Karte benötigt:
+\begin{enumerate}
+  \item boot: Der Bootloader(Berkeley bootloader) um den Linux Kernel zu laden
+  \item vmlinux: Der RISC-V Linux Kernel
+  \item root.bin: Das ramdisk-Image
+\end{enumerate}
+
+\vspace{5mm}
+Der Linux Kernel und das Image können über das Terminal auf die SD-Karte kopiert werden.
+
+\begin{lstlisting}
+Cd $TOP/riscv-tools
+Cp linux-3.14.41/vmlinux /(Pfad der SD-Karte)/vmlinux
+Cp busybox-1.21.1/root.bin /(Pfad der SD-Karte/root.bin
+\end{lstlisting}
+
+
+Der fehlende Bootloader kann wie folgt generiert werden:\\
+
+\begin{lstlisting}
+Cd $TOP/fpga/board/nexys4
+Make bbl
+Cp bbl/bbl /(Pfad der SD-Karte)/boot
+\end{lstlisting}
+
+\newpage
+
+\section{LEON3}\label{kap:leon3}
 
 Um diesen SoftCore zu erstellen, wird der LEON3/GRLIB Source Code benötigt welcher auf der Seite
-https://www.gaisler.com/index.php/downloads/ runtergeladen werden kann.
+\url{https://www.gaisler.com/index.php/downloads} runtergeladen werden kann.
 Diese Datei kann in einen beliebigen Ordner entpackt werden.
 
-Für das hier verwendete Board Nexys4 DDR muss nun in einem Terminal in den Ordner:
+Für das hier verwendete Board Nexys4 DDR muss nun in einem Terminal in den Ordner:\\
 
 \begin{lstlisting}[caption={Pfad zu dem passenden Design},label={code:pfaddesign}]
   ~/grlib-gpl-2017.3-b4208/designs/leon3-digilent-nexys4ddr
@@ -555,17 +822,17 @@ Für das hier verwendete Board Nexys4 DDR muss nun in einem Terminal in den Ordn
 
 navigiert werden.\\
 
-Mit Hilfe des Befehls
+Mit Hilfe des folgenden Aufruf erscheint eine grafische Oberfläche, welche alle Parameter des Designs enthält.\\
 \begin{lstlisting}[caption={Aufruf des Konfigurationsmenüs},label={code:xconfig}]
 make xconfig
    \end{lstlisting}
 
 
-erscheint eine grafische Oberfläche, welche alle Parameter des Designs enthält.
+
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.8\textwidth]{Hauptteil/xconfig.png}
+\includegraphics[width=0.6\textwidth]{Hauptteil/xconfig.png}
 \caption{Grafische Oberfläche zur Konfiguration der Hardware}
 \label{fig:xconfig}
 \end{figure}
@@ -579,20 +846,24 @@ ausgewählt wird. Das Fenster kann geschlossen und die Oberfläche nach dem Spei
 Der gleiche Ablauf ist zu wiederholen, lediglich ist nun die Option
 „Custom-configuration“ auszuwählen, um weitere Einstellungen vorzunehmen.
 
-Durch die vorherigen Schritte wurde eine „Allzweck-Konfiguration“ vorgenommen, welche im Detail in der Tablle ... beschrieben ist.\\
+Durch die vorherigen Schritte wurde eine „Allzweck-Konfiguration“ vorgenommen, welche im Detail in der Tabelle~\ref{tab:generalpurpose} beschrieben ist.\\
 
 
 
+\begin{table}[H]
+ \centering
 \begin{tabularx}{\textwidth}{|c|c|X|}
   \hline
-  dsu & 1 & Unterstüzung der LEON3- Debug suport Unit(DSU)\\
+  Einheit & Wert & Beschreibung\\
+  \hline
+  dsu & 1 & Unterstüzung der LEON3-\ac{dsu}\\
   \hline
   fpu & - & Beinhaltet die \ac{fpu}. Diese ist für die Großzahl an Systemen dringend empfohlen.
    Hierbei kann zwischen der GRFPU und der GRFPU ausgewählt werden. Diese unterscheiden sich in Geschwindigkeit und benötigter Flächenanforderung.\\
   \hline
   V8 & 2 & Unterstützung für SPRAC V8 MUL/DIV Instruktionen mit einer 5-Zyklen-Multiplikation. Bei geeigneter Zieltechnologie, benötigt eine Single-Zyklen-Multiplikation weniger Platz und bietet mehr Leistung\\
   \hline
-  mac & 0 & Beinhaltet keine UNtersütztung für SPARC V8e signed multiply-accumulate(SMAC)/unsigned multiply-accumulate(UMAC)\\
+  mac & 0 & Beinhaltet keine Untersütztung für SPARC V8e \ac{smac}/\ac{umac}\\
   \hline
   nwp & 2 & Fügt zwei Hardware-Watchpoints hinzu\\
   \hline
@@ -624,17 +895,35 @@ Durch die vorherigen Schritte wurde eine „Allzweck-Konfiguration“ vorgenomme
   \hline
   bp & 1 & Aktivierung Verzweigungsprognose\\
   \hline
-  \end{tabularx}\\\\
+  \end{tabularx}
+  \caption{General-Purpose-Configuration}
+  \label{tab:generalpurpose}
+  \end{table}
+\newpage
+\textbf{Anpassung der \ac{uart}-\acs{fifo}-Größe}\\
+
+Um mit dem \ac{fpga}-Board kommunizieren zu können, müssen die \emph{Sender}- beziehungsweise \emph{Empfänger}-\ac{fifo} angepasst werden. Diese können Werte von 1 bis 32 annehmen.
+Der Wert \emph{1} sollte für einen platzsparendes System verwendet werden, in diesem Fall ist jedoch die \emph{32} für eine maximale Übertragung empfehlenswert.\\
+Angepasst werden kann der Wert im \emph{xconfig}-Menü unter dem Untermenü \emph{Peripherals} beziehungsweise \glqq \emph{UARTS, timers and irq control} \grqq{}.\\
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{Hauptteil/fifodepth.png}
+\caption{Anpassung der \ac{fifo}-Größe}
+\label{fig:fifodepth}
+\end{figure}
 
 
-Die getätigten Einstellungen ermöglichen es nun, mit Hilfe des Befehls:
+
+
+Die getätigten Einstellungen ermöglichen es nun, die Synthese anzustoßen.\\
 
 \begin{lstlisting}[caption={Aufruf des Vivado-Programm },label={code:vivado}]
 make vivado
    \end{lstlisting}
 
 
-Die Synthese anzustoßen.
+
 
 
 
@@ -644,46 +933,46 @@ Das erstellte Bitfile wird anschließend mittels des Hardwaremanagers von Vivado
 
 \subsection{Eigenschaften der Hardware}\label{kap:hardwareeigenschaften}
 
+\begin{itemize}
+  \item Die Standardkonfiguration legt die Systemfrequenz auf 70MHz fest.
+  \item Der verwendete DDR2SPA-Controller kann mit bis zu 150MHz getaktet werden. Die Standardkonfiguration legt diese Frequenz bei 140MHz fest.
+   Um diesen DDR2SPA-Controller zu verwenden, muss dieser im \emph{xconfig}-Menü aktiviert werden und die Parameter mit folgenden Werten versehen werden:\\
+  \begin{tabular}[t]{ll}
+  Enable power-on initialization: & Yes\\
+  DDR clock is aligned to system clock: & No\\
+  Memory Frequency: & 140MHz\\
+  tRFC: & 130ns\\
+  Column address bits:  & 10 \\
+  Chip select bank size: & 128 Mbyte\\
+  Data width: & 16 \\
+  \end{tabular}
+  \item Wenn der \ac{mig}-Controller aktiviert ist, läuft dieser mit einer Frequenz von 70 MHz und der DDR2-Speicher mit 280MHz.\\
+  \item Die \ac{ahb}-Clock wird vom \ac{mmcm}-Modul in dem \ac{mig}-Controller generiert und kann mit Hilfe des Xilinx \ac{coregen} gesteuert werden.
+   Wenn der \ac{mig}-Controller nicht zur Verfügung steht, wird die \ac{ahb}-Clock von dem CLKGEN erstellt und via \emph{xconfig} kontrolliert.\\
+  \item LED-Statusanzeige\\
+  	-LED 0/1: zeigen \ac{usb}/\ac{uart} RX/TX Aktivitäten an.\\
+  	-LED 2: \ac{dsu} Debug-Modus\\
+  	-LED 3: zeigt den Prozessor im Fehlermodus an\\
+  	-LED 4: stellt das Ende des Kalibrierungsvorganges für den Speichercontroller dar\\
+  \end{itemize}
+Die \ac{dsu}-Schnittstelle ist aktiviert und über den \ac{usb}/\ac{uart}-Port zugänglich.
+  Für die Ausgabe wird empfohlen das Debugging-Tool von Gaisler zu benutzen, welches den Namen \emph{GRMON} trägt und auf der Herstellerseite kostenfrei heruntergeladen werden kann.\\
+  Dieses Tool bietet verschiedene Aufrufparameter, welche in dem Manual näher beschrieben sind.\\
 
-Die Standardkonfiguration legt die Systemfrequenz auf 70MHz fest.\\
 
-Der verwendete DDR2SPA-Controller kann mit bis zu 150MHz getaktet werden. Die Standardkonfiguration legt diese Frequenz bei 140MHz fest. Um diesen DDR2SPA-Controller zu verwenden, muss dieser im \emph{xconfig}-Menü aktiviert werden und die Parameter mit folgenden Werten versehen werden:
+\newpage
+\textbf{GRMON}\\
 
-- Enable power-on initialization:       Yes\\
-- DDR clock is aligned to system clock: No\\
-- Memory Frequency:                     140 MHz\\
-- tRFC:                                 130 ns\\
-- Column address bits:                  10\\
-- Chip select bank size:                128 Mbyte\\
-- Data width:                           16\\
+In diesem Fall wird der \emph{GRMON} mit folgendem Aufruf gestartet:\\
 
-
-Wenn der \ac{mig}-Controller aktiviert ist, läuft dieser mit einer Frequenz von 70 MHz und der DDR2-Speicher mit 280MHz.\\
-
-
-Die \ac{ahb}-Clock wird vom \ac{mmcm}-Modul in dem \ac{mig}-Controller generiert und kann mit Hilfe des Xilinx \ac{coregen} gesteuert werden.
- Wenn der \ac{mig}-Controller nicht zur Verfügung steht, wird die \ac{ahb}-Clock von dem CLKGEN erstellt und via \emph{xconfig} kontrolliert.\\
-
-LED-Statusanzeige\\
-	-LED 0/1: zeigen USB-UART RX/TX Aktivitäten an.\\
-	-LED 2: \ac{dsu} Debug-Modus\\
-	-LED 3: zeigt den Prozessor im Fehlermodus an\\
-	-LED 4: stellt das Ende des Kalibrierungsvorganges für den Speichercontroller dar\\
-
-
-Die \ac{dsu}-Schnittstelle ist aktiviert und über den USB/UART-Port zugänglich.
-Für die Ausgabe wird empfohlen das Debugging-Tool von Gaisler zu benutzen, welches den Namen \emph{GRMON} trägt und auf der Herstellerseite kostenfrei heruntergeladen werden kann.\\
-
-Dieses Tool bietet verschiedene Aufrufparameter, welche in dem Manual näher beschrieben sind.\\
-
-In diesem Fall wird der \emph{GRMON} mit folgendem Aufruf gestartet:
 
 
 \begin{lstlisting}[caption={Aufruf des GRMON},label={code:grmon}]
-\.\/grmon \–baud 460800 \–uart \/dev\/ttyUSB1 \–u \–nb
-   \end{lstlisting}
+./grmon -baud 460800 -uart /dev/ttyUSB1 -u -nb
+\end{lstlisting}
 
 
+\vspace{5mm}
 Erkärung der einzelnen Parameter:
 \begin{itemize}
   \item baud \emph{baudrate}: Nutzen der angegebenen Baudrate. Die Standardeinstellung liegt bei 115200 baud. Höhere Baudraten benötigten eine entsprechende Unterstützung des Zielsystems.
@@ -691,28 +980,28 @@ Erkärung der einzelnen Parameter:
   \item u [device]: Dieser Befehl versetzt den UART1-Port in den FIFO-Debug Modus, wenn die Hardware es unterstützt. Ist dies nicht gegeben, wird der Loop-back-Modus aktiviert. Dieser Modus ermöglicht es via GRMON über den \ac{uart} zu kommunizieren.
   \item nb: Das System soll bei sogenannten „Error Traps“ nicht anhalten.
 \end{itemize}
-
-Nach dem Start können durch den Befehl
+\newpage
+Nach dem Start können durch den Befehl\\
 
 \begin{lstlisting}[caption={Abruf von Systeminformationen},label={code:infosys}]
 info sys
    \end{lstlisting}
 
-Weitere Informationen zum System ausgegeben werden. Hierbei fällt auf, dass kein SDRAM gefunden wurde.
+weitere Informationen zum System ausgegeben werden. Hierbei fällt auf, dass kein SDRAM gefunden wurde.\\
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{Hauptteil/nosdram.png}
 \caption{Fehlender SDRAM}
 \label{fig:nosdram}
 \end{figure}
 
-Um dies zu beheben ist es nötig den Befehl
+Um diesen Fehler zu beheben muss eine Kalibrierung durchgeführt werden.\\
 
 \begin{lstlisting}[caption={Starten der Routine},label={code:ddr2delay}]
 ddr2delay scan
    \end{lstlisting}
-Auszuführen.
+
 
 Dieses Kommando führt eine Kalibrierungsroutine aus, die alle \emph{tap}- und \emph{read}-Verzögerungen durchsucht, um so eine funktionierende Einstellungen herzustellen.\\
 
