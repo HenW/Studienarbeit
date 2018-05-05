@@ -1,19 +1,18 @@
 \chapter{Grundlagen}\label{kap:Grundlagen}
-\newpage
 \section{Softcore-Prozessoren}\label{kap:softcoreprozessoren}
 
-Ein Soft Core (engl. „Software-Kern“) ist ein Prozessor, Mikrocontroller oder ein Signalprozessor, welcher als virtuelle Einheit in einem \ac{fpga} oder \ac{asic} integriert wird.
-Dies bietet die Möglichkeit einem digitales Schaltungsdesign jeden beliebigen Prozessor hinzuzufügen. Umgesetzt wird dieser Vorgang im \ac{fpga} durch reine Anwenderlogik,
+Ein SoftCore (engl. „Software-Kern“) ist ein Prozessor, Mikrocontroller oder ein Signalprozessor, welcher als virtuelle Einheit in einem \ac{fpga} oder \ac{asic} integriert wird.
+Dies bietet die Möglichkeit einem digitalen Schaltungsdesign jeden beliebigen Prozessor hinzuzufügen. Umgesetzt wird dieser Vorgang im \ac{fpga} durch reine Anwenderlogik,
 welche dementsprechend konfiguriert werden muss.\\
 Das typische Anwendungsgebiet eines SoftCores ist die Lösung von komplizierten Aufgaben, mit denen klassische „State Machines“ überfordert sind oder die Effektivität
- nicht mehr gegeben ist. Somit werden Softcores oftmals nachträglich in bestehende Designs eingefügt, wenn deren Umfang sich extrem vergrößert hat.\\
+ nicht mehr gegeben ist. Somit werden SoftCores oftmals nachträglich in bestehende Designs eingefügt, wenn deren Umfang sich extrem vergrößert hat.\cite{softcore}\\
 
 \subsection{Vergleich SoftCores und HardCores}\label{kap:vergleich}
 Vorteile:
 \begin{itemize}
    \item Flexible Anwendung: Das \ac{fpga} kann bei Bedarf mit einem SoftCore versehen werden, jedoch wird nicht von vorneherein Platz für einen HardCore verschwendet, welcher
     dann letztendlich ungenutzt bleibt. Daraus ergeben sich deutliche Vorteile im Hinblick auf die Kosten.
-    \item Konfigurierbarkeit: Beim Softcore deutlich flexibler, da hier unter anderem die Größe der Datenpfade und die Anzahl der Zusatzmodule variiert werden kann.
+    \item Konfigurierbarkeit: Beim SoftCore deutlich flexibler, da hier unter anderem die Größe der Datenpfade und die Anzahl der Zusatzmodule variiert werden kann.
  \end{itemize}
 
 
@@ -46,7 +45,7 @@ Damit die \ac{cpu} die Nachricht erhält, dass Daten an solch einer Schnittstell
 unterbrechen. Hier gibt es die Art des sogenannten Polling, bei dem der Prozessor alle vorhandenen Eingabegeräte zyklisch abfragt. Ein effektiveres Verfahren ist die
 Unterbrechungsanforderung (Interrupt), welche eintritt, wenn Daten anliegen. \\
 Sobald ein Gerät Daten zur Weiterverarbeitung besitzt, wird ein \ac{irq} auf der dafür vorgesehenen Interrupt-Leitung gesendet. Daraufhin unterbricht der Prozessor
-seine Arbeit und verarbeitet die Daten des Gerätes.\\
+seine Arbeit und verarbeitet die Daten des Gerätes.\cite{irq}\\
 
 \begin{figure}[H]
 \centering
@@ -56,8 +55,7 @@ seine Arbeit und verarbeitet die Daten des Gerätes.\\
 
 
  \section{Peripherie}\label{kap:peripherie}
- Ein Peripheriegerät kann einer Hardware hinzugefügt werden um die Fähigkeiten zu erweitern. Sie sind optional im Gegensatz zu der Hardware, welche in den vorherigen
- Kapiteln beschrieben wurde.
+ Ein Peripheriegerät kann einer Hardware hinzugefügt werden um die Fähigkeiten zu erweitern. Diese sind,im Gegensatz zu der Hardware, optional.
 
 \subsection{UART}\label{kap:uart}
 
@@ -65,7 +63,7 @@ Um mit Peripheriegeräten zu kommunizieren, kann \ac{uart} als serielle Schnitts
 Bei dieser Art der Kommunikation werden serielle Daten zwischen dem Board (\emph{Master})
 und dem Empfänger (\emph{Slave}) ausgetauscht. Dabei spielen die TxD und die RxD-Datenleitungen
 eine wichtige Rolle, da der Datenaustausch über diese Leitungen realisiert wird.\\
-Im Gegensatz zu der \ac{spi}-Schnittstelle (~\ref{kap:spi}), wird kein Clock-Signal
+Im Gegensatz zu einer \ac{spi}-Schnittstelle, wird kein Clock-Signal
 übertragen um Daten zu validieren. Des Weiteren wird die Verbindung mit einer definierten
 Geschwindigkeit realisiert, der sogenannten \emph{Baudrate}. \cite{uartpdf} \\
 Die Baudrate bezeichnet dabei die Anzahl der Bits, welche pro Sekunde übertragen werden.
@@ -94,8 +92,8 @@ Die Datenübertragung lässt sich nach~\ref{fig:uart} darstellen.\\
 
 \section{Compiler}\label{kap:compiler}
 
-Der Compiler ist ein Werkzeug, welches den Quelltext, der mit Hilfe einer höheren Programmiersprache (C++, C, Java) geschrieben wurde, in Maschinenbefehle umzusetzen. Damit der Prozessor diese Instruktionen ausführen kann, werden die lesbaren Programmierbefehle übersetzt. Nach dem so genannten kompilieren steht das Programm zur Ausführung bereit.
-Die Aufgaben des Compilers bestehen grundsätzlich aus drei Schritten:
+Der Compiler ist ein Werkzeug, welches den Quelltext, der mit Hilfe einer höheren Programmiersprache (C++, C, Java) geschrieben wurde, in Maschinenbefehle umsetzt. Damit der Prozessor diese Instruktionen ausführen kann, werden die lesbaren Programmierbefehle übersetzt. Nach dem so genannten kompilieren steht das Programm zur Ausführung bereit.
+Die Aufgaben des Compilers bestehen grundsätzlich aus drei Schritten:\cite{compiler}
 \begin{enumerate}
   \item Lexikalische Analyse:
   	Der Compiler zerlegt die Wörter und Zeichen des Quelltextes in verschiedene Klassen. Dabei werden überflüssige oder fehlende Zeichen als Fehler erkannt und vom Compiler, je nach
@@ -124,11 +122,11 @@ Nachteile:
 \caption{Funktionsweise des Compilers}\label{fig:compiler}
 \end{figure}
 
-\subsection{Compiler-Modes}\label{kap:compilermode}
+\subsection{Compiler-Modi}\label{kap:compilermode}
 \begin{itemize}
   \item Bare metal mode: Programme ohne Zugriff auf Ein- bzw. Ausgabegeräte. Programme, welche in diesem Modus ausgeführt werden, haben keine periphere Unterstützung
-        Der Bare-Metal-Mode wird meistens genutzt, um \ac{isa}- und Cache-Regressionstests durchzuführen. Hierbei entscheidet der Rückgabewert des Programmes über Erfolg bzw. Misserfolg
-        des Tests. \emph{0} bedeutet Erfolg, Zahlen ungleich \emph{0} geben den jeweiligen Fehlercode an. Bare-Metal-kompilierte Programm laufen auf einem \ac{fpga} un in einer Simulation
+        Der Bare-Metal-Mode wird meistens genutzt, um \ac{isa}- und Cache-Regressionstests durchzuführen. Hierbei entscheidet der Rückgabewert des Programmes über Erfolg beziehungsweise Misserfolg
+        des Tests. \emph{0} bedeutet Erfolg, Zahlen ungleich \emph{0} geben den jeweiligen Fehlercode an. Bare-Metal-kompilierte Programm laufen auf einem \ac{fpga} und in einer Simulation
         im Hintergrund.
   \item Newlib mode: Programme mit Zugriff auf Ein- bzw. Ausgaberäte. Programme besitzen die Kontrolle der Peripheriegeräte, sind jedoch single-threaded. Ein Beispiel
   für ein Programm, welches in diesem Modus kompiliert wird sind Bootloader.
@@ -192,8 +190,7 @@ zu können, benötigt jedes Gerät einen eigenen Treiber. Dieser Treiber ist im 
 als \emph{„Wissen“} hinterlegt und beinhaltet Information über das Gerät und dessen
 Zugriffsmöglichkeiten und wird im folgenden Unterkapitel näher erklärt. \cite{treiber}\\
 Der Anwender hat nun die Möglichkeit über die Treiber auf die Schnittstellen zuzugreifen, in dem diese vom
-Treiber gesteuert werden. Die in dieser Arbeit genutzten Schnittstellen (UART, SPI) werden in den
-Kapiteln~\ref{kap:uart} und~\ref{kap:spi} näher beschrieben.
+Treiber gesteuert werden.
 
 \subsection{Treiber}\label{kap:treiber}
 
@@ -245,16 +242,14 @@ eindeutige Identifikation per \emph{Compatible} festgelegt.
 und ein \emph{Bootloader} für das Zielsystem erstellt werden.  In einem Konfigurationsprogramm lassen sich vor der
 Erstellung sämtliche Optionen und Erweiterungen ab- beziehungsweise anwählen. \\
 Das Tool wird größtenteils dafür genutzt, um die Systeme für andere Prozessoren, außer die klassischen x86-Prozessoren,
-zu erstellen, wie zum Beispiel \ac{arm}-Prozessoren.\\
-Der in Kapitel~\ref{kap:gpsd} näher beschriebene \ac{gpsd} lässt sich ebenfalls
-über das \emph{Buildroot}-Tool dem Gesamtsystem hinzufügen.\cite{buildroot}\\
+zu erstellen, wie zum Beispiel \ac{arm}-Prozessoren.\cite{buildroot}\\
 
 \chapter{Soft Cores}\label{kap:softcores}
 \newpage
 \section{MicroBlaze}\label{kap:microblaze}
 Microblaze
 
-Der MicroBlaze Softprozessor von Xilinx ist eine 32-Bit RISC Harvard Architektur mit einem umfangreichen Befehlssatz und ist optimiert für eingebettete Anwendungen.
+Der MicroBlaze SoftCore von Xilinx ist eine 32-Bit RISC Harvard Architektur mit einem umfangreichen Befehlssatz und ist optimiert für eingebettete Anwendungen.
 Neben dieser Flexibilität besitzt er drei Voreinstellungen:
 
 \begin{enumerate}
@@ -268,10 +263,10 @@ Neben dieser Flexibilität besitzt er drei Voreinstellungen:
           \item Interrupt-Controller
           \item  Timer
         \end{itemize}
-  \item Echtzeitprozessor: Deterministische Echtzeitverarbeitung auf einem RTOS
+  \item Echtzeitprozessor: Deterministische Echtzeitverarbeitung auf einem \ac{rtos}
     \begin{itemize}
-      \item Alle Microcontroller Preset Blöcke
-      \item Instructioncache
+      \item Alle Mikrocontroller Preset Blöcke
+      \item Instruktioncache
       \item Speicherschutzeinheit
       \item Datencache
       \item DDR-Controller
@@ -286,19 +281,19 @@ Neben dieser Flexibilität besitzt er drei Voreinstellungen:
 \end{enumerate}
 
 Ausgehend von diesen Presets lässt sich das Design mit Hilfe von spezifischen Prozessoroptionen anpassen.
- Diese Vielanzahl an Anpassungen sind per Drag \& Drop sehr einfach hinzuzufügen. Dazu zählen unter anderem UART-, PWM- und DMA-Bausteine, sowie serielle Schnittstellen.
+ Diese Vielanzahl an Anpassungen sind per Drag \& Drop sehr einfach hinzuzufügen. Dazu zählen unter anderem \ac{uart}-,\ac{pwm}- und \ac{dma}-Bausteine, sowie serielle Schnittstellen.
  Dadurch wird sichergestellt, dass die spezifischen Anforderungen der Anwendung erfüllt werden.
 
 Zusammengefasst besitzt der Microblaze folgende Schlüsselfähigkeiten:
 \begin{itemize}
   \item 32-Bit-Befehlssatz und allgemeine Register
-  \item 32-Bit-Adressbus, welcher erweiterbar auf 64-Bit ist
+  \item 32-Bit-Adressbus, erweiterbar auf 64-Bit
   \item Lockstep und TMP-fähig
-  \item Optionale FPU
+  \item Optionale \ac{fpu}
   \item Verschiedene Zustandsmodi (Sleep, Hibernate, Suspend Mode/Instrctions)
-  \item Unterstützt entweder PLB- oder AXI-Schnittstellen
+  \item Unterstützt entweder \ac{plb}- oder \ac{axi}-Schnittstellen
   \item Big-Endian / Little-endian Unterstützung
-  \item Optionale MMU
+  \item Optionale \ac{mmu}
 \end{itemize}
 
 
@@ -317,7 +312,7 @@ Anschließend klicken Sie auf \emph{Finish} und das Projekt wird erstellt.\\
 Im Flow Navigator  auf der linken Seite wählt man nun \emph{Create Block Design} aus und
  gibt diesem Design einen beliebigen Namen.
 Es öffnet sich das Block Design, bei dem der Tab \emph{Board} zu wählen ist. Hier werden nun
-alle Bausteine für das Nexys4 DDR-Board angezeigt.\\\\
+alle passenden Bausteine für das Nexys4 DDR-Board angezeigt.\\\\
 
 \begin{figure}[H]
 \centering
@@ -330,7 +325,7 @@ alle Bausteine für das Nexys4 DDR-Board angezeigt.\\\\
 
 \textbf{Hinzufügen der Bausteine}\\\\
 Durch doppeltes Klicken auf die Bausteine werden zunächst die \emph{System Clock}, \emph{USB UART} und \emph{DDR2 SDRAM} hinzugefügt. Die folgenden Fenster werden jeweils mit OK bestätigt.
-Im Design Diagram kann nun über das „+“-Symbol der Microblaze und der \emph{AXI Timer} eingefügt werden.\\
+Im Design Diagram kann nun über das „+“-Symbol der Microblaze und der \emph{\ac{axi} Timer} eingefügt werden.\\
 
 \newpage
 \textbf{Konfiguration des Clocking Wizard}\\\\
@@ -352,7 +347,7 @@ Dabei wird eine zweite Output Clock auf 200MHz gesetzt, sowie der Reset Type auf
 
 \textbf{Anpassung der bestehenden Verbindungen}\\
 
-Die bestehende Verbindung zwischen der SysClock und dem MIG muss gelöscht werden und eine neue zwischen dem Clocking Wizard und dem MIG erstellt werden.\\
+Die bestehende Verbindung zwischen der SysClock und dem MIG muss gelöscht werden und eine neue Verknüpfung zwischen dem Clocking Wizard und dem MIG erstellt werden.\\
 
 \begin{figure}[H]
 \centering
@@ -363,7 +358,7 @@ Die bestehende Verbindung zwischen der SysClock und dem MIG muss gelöscht werde
 
 \textbf{Block Automation}\\
 
-Ab hier übernimmt zuerst die \emph{Block Automation}, bei der die im nachfolgenden Bild angezeigten Einstellungen zu übernehmen sind.
+Ab hier greift die \emph{Block Automation} ein, bei der die im nachfolgenden Bild angezeigten Einstellungen zu übernehmen sind.
 Besonders wichtig ist hier die Auswahl des Interrupt Controller.
 
 \begin{figure}[H]
@@ -373,12 +368,12 @@ Besonders wichtig ist hier die Auswahl des Interrupt Controller.
 \end{figure}
 
 
-Im Anschluss wird die „Connection Automation“ gestartet und alle Bausteine ausgewählt.
-Durch die Schaltfläche „Regenerate Layout“ kann das Diagram neu angeordnet werden.\\
+Im Anschluss wird die \emph{Connection Automation} gestartet und alle Bausteine ausgewählt.
+Durch die Schaltfläche \emph{Regenerate Layout} kann das Diagram neu angeordnet werden.\\
 
 \textbf{Manuelle Verbindungen}\\
 
-Der angelegte Interrupt Controller ist mit einem Concat verbunden, auf dessen Eingänge manuell die Interruptleitungen des AXI Uartlite und des AXI Timers gelegt werden.
+Der angelegte Interrupt Controller ist mit einem Concat verbunden, auf dessen Eingänge manuell die Interruptleitungen des \ac{axi} Uartlite und des \ac{axi} Timers gelegt werden.
 Die Verbindungen sind im folgenden Bild orange gekennzeichnet.\\\\
 
 \begin{figure}[H]
@@ -394,13 +389,13 @@ Die Verbindungen sind im folgenden Bild orange gekennzeichnet.\\\\
 Der sogenannte MicroBlaze Configuration Wizard ermöglicht es, bereits voreingestellte Konfigurationen zu wählen.
 
 \begin{itemize}
-  \item Minimum Area: Minimaler MicroBlaze Core. Kein Cache und kein Debug
-  \item Maximum Performace: Maximale Leistung. Großer Cache und Debug
-  \item Maximum Frequency: Maximale Frequeny. Kein Cache und kein Debug mit wenigen Ausführungseinheiten
-  \item Linux with \ac{mmu}: Hohe Leistung, Linux-optimiert \ac{mmu} aktiviert, großer Cache und Debug
+  \item Minimum Area: Minimaler MicroBlaze Core, kein Cache und kein Debug
+  \item Maximum Performance: Maximale Leistung, großer Cache und Debug
+  \item Maximum Frequency: Maximale Frequenz, kein Cache und kein Debug mit wenigen Ausführungseinheiten
+  \item Linux with \ac{mmu}: Hohe Leistung, Linux-optimiert,\ac{mmu} aktiviert, großer Cache und Debug
   \item Low-end Linux with \ac{mmu}: Für low-end-Systeme, \ac{mmu} aktiviert, kleiner Cache und Debug
   \item Typical: Kompromiss zwischen Leistung, Frequenz und Größe
-  \item Frequency Optimized: Bestmögliche Frequenz. \ac{mmu} aktiviert
+  \item Frequency Optimized: Bestmögliche Frequenz, \ac{mmu} aktiviert
 \end{itemize}
 
   Der Microblaze ist wie folgt durch einen Doppelklick zu konfigurieren.
@@ -427,7 +422,7 @@ Diese Änderung ist mit OK zu bestätigen.\\
 
 \textbf{Erstellen des HDL Wrappers}\\
 
-Durch klicken der rechten Maustaste auf das Design im Source-Tab wird nun der HDL Wrapper erstellt.\\
+Durch das Klicken der rechten Maustaste auf das Design im Source-Tab wird nun der HDL Wrapper erstellt.\\
 
 \textbf{Generierung des Bitfiles}\\
 
@@ -446,9 +441,9 @@ Nach dem Entpacken wird der Ordner nun im \ac{sdk} als Repository eingebunden.
 
 \textbf{Erzeugen des Board Support Packages}\\
 
-Das Erstellen des Device-Tree geschieht über „File“ und anschließend „New“ und „Board Support Package“.
+Das Erstellen des Device-Tree geschieht über „File“ und anschließend „New“, sowie den Button „Board Support Package“.
 Dabei sollte nochmal die voreingestellten Parameter überprüft werden und als Board Support Package OS
-devicetree ausgewählt werden.
+\emph{devicetree} ausgewählt werden.
 
 \begin{figure}[H]
 \centering
@@ -461,7 +456,7 @@ Das folgenden Fenster kann ohne Weiteres mit OK bestätigt werden.\\
 
 \textbf{Zusammenführung der \emph{Device Tree Source}-Dateien}\\
 
-Die entstandenen \emph{.dtsi} beziehungsweise \emph{.dts}-Dateien müssen gemerged werden und in einer \emph{.dts}-Datei gespeichert werden.
+Die entstandenen \emph{.dtsi} beziehungsweise \emph{.dts}-Dateien müssen zusammengeführt werden und in einer \emph{.dts}-Datei gespeichert werden.
 Hierzu sind beide Dateien im Texteditor zu öffnen, um die \emph{.dts}
  in die \emph{.dtsi}-Datei zu kopieren.
  Die resultierende Datei wird, wie bereits erwähnt, als alleinstehende \emph{.dts}-Datei gespeichert, um später in das buildroot-Tool eingefügt zu werden.\\
@@ -496,8 +491,8 @@ Hierzu sind beide Dateien im Texteditor zu öffnen, um die \emph{.dts}
 \textbf{Buildroot}\\
 
 Das bereits genannte Buildroot kann unter \url{https://buildroot.org/download.html} heruntergeladen werden.
-Das in meiner Arbeit verwendete Buildtool besitzt die Version 2018.02.\\
-Neben dem Buildroot werden Linux Kernel \emph{defonfig}-Dateien benötigt, welche von mir für das Nexys4 angepasst wurden und auf folgenden Github zur Verfügung stehen :
+Das in dieser Arbeit verwendete Buildtool besitzt die Version 2018.02.\\
+Neben dem Buildroot werden Linux Kernel \emph{defonfig}-Dateien benötigt, welche für das Nexys4 angepasst wurden und auf folgenden Github zur Verfügung stehen :
 
 \url{https://github.com/HenW/microblaze/tree/master}
 
@@ -543,7 +538,7 @@ die \ac{sdk} Shell leicht zu erreichen ist. Das \ac{fpga}-Board wird nun mit dem
 
 \textbf{Starten der \ac{xmd}-Engine}\\
 
-Um die Verbindung zu prüfen kann, nachdem das \ac{fpga}-Board programmiert wurde ein Hello World Programm ausgeführt werden. Andernfalls kann direkt im SDK über Xilinx Tools, beziehungsweise  „Launch Shell“ ein Terminal geöffnet werden.
+Um die Verbindung zu prüfen kann, nachdem das \ac{fpga}-Board programmiert wurde, ein Hello World Programm ausgeführt werden. Andernfalls kann direkt im SDK über Xilinx Tools, beziehungsweise  „Launch Shell“ ein Terminal geöffnet werden.\\
 
 Mit dem Befehl:
 
@@ -554,7 +549,7 @@ Mit dem Befehl:
 
 wird eine \ac{xmd} Engine gestartet.\\
 
-Anschließend wird über
+Anschließend wird über\\
 \begin{lstlisting}[caption={Herstellen der Verbindung zum \acl{mb}},label={code:mbtarget}]
 connect mb mdm
    \end{lstlisting}
@@ -576,16 +571,16 @@ das Image heruntergeladen werden.
 
 Um die RISC-V Tools erstellen zu können, werden verschiedene Pakete benötigt, welche vorher zu installieren sind.
 \begin{itemize}
-  \item autoconf: Produziert shell scripts zur automatischen Konfiguration von Software
-  \item automake: Tool zur Generierung von Makefile Dateien
+  \item autoconf: Produziert Shell Skripte zur automatischen Konfiguration von Software
+  \item automake: Tool zur Generierung von Makefile-Dateien
   \item autotools-dev: Erneuert die Infrastruktur für config-Dateien
   \item libmpfr-dev: Mehrfach genaue Arithmetikbibliothek – Entwicklungswerkzeuge
   \item libmps-dev: siehe libmpfr-dev
   \item libgmp-dev: siehe libmpfr-dev
   \item gawk: GNU-Projekt Implementierung der AWK Programmiersprache
   \item build-essentials: Benötigte Pakete zur Kompilierung eines Pakets
-  \item bison: YACC-  kompatibeler Parser-Generator
-  \item flex: schneller lexical- Analysator Generator
+  \item bison: YACC-kompatibeler Parser-Generator
+  \item flex: schneller lexikalischer-Analysator
   \item texinfo: hypertextfähiges Dokumentationssystem
   \item gperf: Hash-Funktionsgenerator
   \item libncurses5-dev: Ncurses-Bibliotheken für Entwickler
@@ -608,7 +603,7 @@ Git
 Hierbei ist es empfehlenswert, dass gesamte Repository zu klonen, statt einzelne Untermodule.\\
 
 \begin{lstlisting}[caption={Download des Repositories},label={code:riscrepository}]
-Cd ~/lowRISC/DIR
+cd ~/lowRISC/DIR
 #download des untether-v0.2-Branch
 git clone -b untether-v0.2 -recursive https://github.com/lowrisc/lowrisc-chip.git
 cd lowrisc-chip
@@ -639,10 +634,10 @@ export FPGA_BOARD=nexys4
 Ausgeführt wird die angepasste Datei im Terminal mit:\\
 
 \begin{lstlisting}[caption={Umgebungsvariablen},label={code:umgebungsvariablen}]
-Source set_riscv_env.sh
+source set_riscv_env.sh
 \end{lstlisting}
 
-Es gilt zu beachten, dass das Einrichten dieser Umgebung jeweils nur für das genutzte Terminal gilt. Wird ein neues beziehungsweise weiteres Terminal geöffnet, müssen vorherigen Schritte erneut ausgeführt werden.\\
+Es gilt zu beachten, dass das Einrichten dieser Umgebung jeweils nur für das genutzte Terminal gilt. Wird ein neues beziehungsweise ein weiteres Terminal geöffnet, müssen vorherigen Schritte erneut ausgeführt werden.\\
 
 \textbf{Bauen des RISC-V Cross-Kompilierung-Tools}\\
 
@@ -659,7 +654,7 @@ auszuführen.\\
 Nach der erfolgreichen Kompilierung sollten der Cross-Compiler, sowie Spike zur Verfügung stehen. Geprüft werden kann dies mit:\\
 
 \begin{lstlisting}[caption={Überprüfung der Erreichbarkeit des Compilers},label={code:elfgcc}]
-Which riscv64-unknown-elf-gcc
+which riscv64-unknown-elf-gcc
 \end{lstlisting}
 
 
@@ -756,19 +751,19 @@ make bitstream
 
 Die Bitstream-Datei ist anschließend unter dem Pfad \emph{lowrisc-chip-imp/lowrisc-chip-imp.runs/impl\_1/chip\_top.bit} zu finden.\\
 
-\textbf{Kompilieren und Ausführen von Bare-Metal-Beispielen}\\
+\textbf{Kompilieren und Ausführen von Bare-Metal-Programmen}\\
 
 In dem \emph{lowrisc}-Verzeichnis sind bereits vier Bare-Metal Beispiele hinterlegt. Mit Hilfe einfacher Skripte können diese kompiliert werden und die neue Bitstream-Datei generiert werden.
 Für das klassische Hello-World Programm ist folgender Aufruf notwendig:\\
 
 \begin{lstlisting}[caption={Erzeugen und kompilieren eines Beispielprogrammes},label={code:helloworld}]
 cd $TOP/fpga/board/nexys4
-Make hello
+make hello
 \end{lstlisting}
 
 
 Anschließend befindet sich im Verzeichnis \emph{lowrisc-chip-imp/lowrisc-chip-imp.runs/impl\_1} eine \emph{chip\_top.new.bit}-Datei, welche auch zum konfigurieren des FPGA genutzt werden sollte.
-Mit Hilfe von Vivado kann der FPGA mit der Bitstrea-Datei programmiert werden.
+Mit Hilfe von Vivado kann der FPGA mit der Bitstream-Datei programmiert werden.
 
 Der \emph{Minicom} wird genutzt um die \ac{uart}-Schnittstelle zu testen.\\
 
@@ -777,7 +772,7 @@ minicom -D /dev/(passende USB-Schnittstelle)
 \end{lstlisting}
 
 
-Nun sollte als Ausgabe Hello World erscheinen.\\
+Es sollte als Ausgabe Hello World erscheinen.\\
 
 \textbf{Vorbereiten des eigenen Images}\\
 
@@ -839,7 +834,7 @@ make xconfig
 
 Hier lassen sich nun sämtliche Einstellungen wie gewünscht verändern und anpassen.\\
 
-Zuerst muss der Prozessor angepasst werden. Hier ist es wichtig, dass bei dem Drop-down Menü „Force values from example configuration“ die Option
+Zuerst muss der Prozessor angepasst werden. Hier ist es wichtig, dass bei dem Drop-Down Menü „Force values from example configuration“ die Option
 
 „General-purpose-cfg“
 ausgewählt wird. Das Fenster kann geschlossen und die Oberfläche nach dem Speichern beendet werden, um das Menü anschließend erneut aufzurufen.
@@ -975,7 +970,7 @@ In diesem Fall wird der \emph{GRMON} mit folgendem Aufruf gestartet:\\
 \vspace{5mm}
 Erkärung der einzelnen Parameter:
 \begin{itemize}
-  \item baud \emph{baudrate}: Nutzen der angegebenen Baudrate. Die Standardeinstellung liegt bei 115200 baud. Höhere Baudraten benötigten eine entsprechende Unterstützung des Zielsystems.
+  \item baud \emph{baudrate}: Nutzen der angegebenen Baudrate. Die Standardeinstellung liegt bei 115200 baud. Höhere Baudraten benötigen eine entsprechende Unterstützung des Zielsystems.
   \item uart \emph{device}: Standardmäßig nutzt der GRMON den ersten \ac{uart}-Port des Hostrechners. Diese Einstellung kann mit Hilfe der speziellen Angabe überschrieben werden und so sichergestellt werden, dass mit dem gewünschten Gerät kommuniziert wird.
   \item u [device]: Dieser Befehl versetzt den UART1-Port in den FIFO-Debug Modus, wenn die Hardware es unterstützt. Ist dies nicht gegeben, wird der Loop-back-Modus aktiviert. Dieser Modus ermöglicht es via GRMON über den \ac{uart} zu kommunizieren.
   \item nb: Das System soll bei sogenannten „Error Traps“ nicht anhalten.
