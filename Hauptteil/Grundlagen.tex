@@ -47,7 +47,8 @@ Bereich zugreifen wollen.\cite{itwissen}\\
 
 Um mit Peripheriegeräten zu kommunizieren, kann \ac{uart} als serielle Schnittstelle genutzt.
 Bei dieser Art der Kommunikation werden serielle Daten zwischen dem Board (\emph{Master})
-und dem Empfänger (\emph{Slave}) ausgetauscht. Dabei spielen die TxD und die RxD-Datenleitungen
+und dem Empfänger (\emph{Slave}) ausgetauscht. \\
+Dabei spielen die TxD und die RxD-Datenleitungen
 eine wichtige Rolle, da der Datenaustausch über diese Leitungen realisiert wird.\\
 Im Gegensatz zu einer \ac{spi}-Schnittstelle, wird kein Clock-Signal
 übertragen um Daten zu validieren. Des Weiteren wird die Verbindung mit einer definierten
@@ -226,7 +227,8 @@ Bei der Implementierung von Gerätetreibern wird zwischen drei Gerätetypen unte
 \subsubsection{Device Tree}\label{kap:devicetree}
 
 
-Der \emph{Device-Tree} ersetzt beim \ac{arm}-Prozessor das, was beim normalen PC das \ac{bios} ist. Er beinhaltet
+Der \emph{Device-Tree} ersetzt beim \ac{arm}-Prozessor das, was beim normalen PC das \ac{bios} ist. \\
+Er beinhaltet
 Informationen, welche dem Kernel beim Booten helfen. Da das System angeschlossene Geräte nicht automatisch erkennen
 und die dazu passenden Treiber laden kann, geschieht das in dieser \emph{.dts}-Datei. Durch das Kompilieren wird daraus
 der sogennante \emph{Device} \emph{Tree} \emph{Blob}. Dieser wird zusammen mit dem Kernel vom Bootloader geladen und im
@@ -246,7 +248,6 @@ Das Tool wird größtenteils dafür genutzt, um die Systeme für andere Prozesso
 zu erstellen, wie zum Beispiel \ac{arm}-Prozessoren.\cite{buildroot}\\
 
 \chapter{Soft Cores}\label{kap:softcores}
-\newpage
 \section{MicroBlaze}\label{kap:microblaze}
 Microblaze
 
@@ -356,6 +357,7 @@ Die bestehende Verbindung zwischen der SysClock und dem MIG muss gelöscht werde
 \caption{Neue Verbindung zwischen ClkWiz und MIG7}\label{fig:mbschritt6}
 \end{figure}
 
+\vspace{10mm}
 
 \textbf{Block Automation}\\
 
@@ -364,7 +366,7 @@ Besonders wichtig ist hier die Auswahl des Interrupt Controller.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.6\textwidth]{Hauptteil/schritt7.png}
+\includegraphics[width=0.65\textwidth]{Hauptteil/schritt7.png}
 \caption{Einstellungen der Block Automation}\label{fig:mbschritt7}
 \end{figure}
 
@@ -958,7 +960,7 @@ Das erstellte Bitfile wird anschließend mittels des Hardwaremanagers von Vivado
 
 \begin{itemize}
   \item Die Standardkonfiguration legt die Systemfrequenz auf 70MHz fest.
-  \item Der verwendete DDR2SPA-Controller kann mit bis zu 150MHz getaktet werden. Die Standardkonfiguration legt diese Frequenz bei 140MHz fest.
+  \item Der verwendete DDR2SPA-Controller kann mit bis zu 150MHz getaktet werden. Die Standardkonfiguration legt diese Frequenz bei 140MHz fest.\\
    Um diesen DDR2SPA-Controller zu verwenden, muss dieser im \emph{xconfig}-Menü aktiviert werden und die Parameter mit folgenden Werten versehen werden:\\
   \begin{tabular}[t]{ll}
   Enable power-on initialization: & Yes\\
@@ -1039,21 +1041,24 @@ Wiederholt man nun die Ausgabe der Systeminformationen, sollte SDRAM vorhanden s
 \label{fig:sdram}
 \end{figure}
 
-Linux
 
-Das passende Linux Image für das LEON3-System wird am einfachsten mit LINUXBUILD erzeugt. Hierfür werden zwei essentielle Programme benötigt:
-1. Linux Toolchain: Eine „Werkzeugkette“, welche für die Programmierung von Anwendungen und Betriebssystemen eingesetzt wird
-2. LINUXBUILD: Zu Konfiguration des Kernels
-
+\newpage
 \subsection{Linux für LEON3}\label{kap:linuxleon}
 
+Das passende Linux Image für das LEON3-System wird am einfachsten mit LINUXBUILD erzeugt. Hierfür werden zwei essentielle Programme benötigt:
+\begin{enumerate}
+  \item Linux Toolchain: Eine „Werkzeugkette“, welche für die Programmierung von Anwendungen und Betriebssystemen eingesetzt wird
+  \item LINUXBUILD: Zu Konfiguration des Kernels
+\end{enumerate}
+
+\vspace{2mm}
 
 \textbf{Linux Toolchain}\\
 
 Bevor LINUXBUILD konfiguriert und genutzt werden kann, muss die SPARC/LEON Linux Toolchain installiert werden.
 Diese kann direkt von der Seite \url{ http://gaisler.com/anonftp/linux/linux-2.6/toolchains/} heruntergeladen werden Hierbei sollte die Kompatibilität von Toolchain und Linuxkernel beachtet werden.\\
 Die Toolchain muss in dem Ordner \emph{/opt} installiert werden, da sonst die Umgebungsvariablen zu Fehlern führen können. Als Beispiel ist das Zielverzeichnis für die sparc-gaisler-linux4.9 Toolchain der Ordner \emph{/opt/sparc-gaisler-linux4.9}.
-Dieses Verzeichnis muss jetzt als Pfad angegeben werden.
+Dieses Verzeichnis muss jetzt als Pfad angegeben werden.\\
 
 \begin{lstlisting}[caption={Anpassen der Umgebungsvariablen},label={code:linuxpath}]
 $ export PATH=/opt/sparc-gaisler-linux4.9/bin:$PATH
@@ -1061,7 +1066,7 @@ $ export PATH=/opt/sparc-gaisler-linux4.9/bin:$PATH
  /opt/sparc-gaisler-linux4.9/bin/sparc-linux-gcc
 \end{lstlisting}
 
-
+\vspace{2mm}
 \textbf{LINUXBUILD}\\
 
 Das bereits angesprochen LINUXBUILD-Paket kann unter \url{https://www.gaisler.com/anonftp/linux/linux-2.6/linuxbuild/} heruntergeladen werden und an einem beliebigen Ort entpackt werden.
@@ -1069,21 +1074,20 @@ Das bereits angesprochen LINUXBUILD-Paket kann unter \url{https://www.gaisler.co
 Nachdem mit Hilfe des Terminals in den entsprechenden Ordner navigiert wurde, kann durch verschiedene Aufrufe das Konfigurationsmenü aufgerufen werden.
 
 \begin{itemize}
-\item make config: Qt basiert \ac{gui} (benötigt Qt-3/4 Bibliotheken)
-\item make gconfig: \ac{gtk} basierte \ac{gui} GTK = GIMP Toolkit
+\item make config: Qt basiert \acs{gui} (benötigt Qt-3/4 Bibliotheken)
+\item make gconfig: \ac{gtk} basierte \ac{gui}
 \item make menuconfig: Ncurses basiertes Terminal Interface
 \end{itemize}
 
-\textbf{Einrichten der Konfiguration}
-
-
+\textbf{Einrichten der Konfiguration}\\
 
 Der Menüpunkt „Install Linux“ führt letztendlich zur Installation des Images.
  Das doppelte Klicken auf den Unterpunkt „Execute Linux installation of latest stable leon-linux“ wählt hierbei immer die letzte stabile Version aus, welche extra für das LEON3-System konfiguriert ist. \\
 Das im Anschluss sich öffnende Pop-Up-Fenster kann mit „Yes“ bestätigt werden und die Installation wird gestartet.
 Es gilt zu beachten, dass die Installation nicht mit einem Fehler beendet wird und reibungslos durchläuft. Das Fenster kann mit der \emph{Return}-Taste geschlossen werden.\\
 
-Der Pfad, zu der im vorherigen Schritt installierten Toolchain, muss jetzt im Linuxbuild angegeben werden. Unter dem Menüpunkt \emph{Step 2:package configuration} und dem Unterpunkt \emph{Toolchain confirguration}
+Der Pfad, zu der im vorherigen Schritt installierten Toolchain, muss jetzt im Linuxbuild angegeben werden.
+Dies ist in dem Menüpunkt \emph{Step 2:package configuration} und dem Unterpunkt \emph{Toolchain confirguration} möglich.\\
 
 \begin{figure}[H]
 \centering
@@ -1099,6 +1103,7 @@ Wurde das Image erfolgreich erstellt, kann das Fenster sowie \emph{xconfig} gesc
 \item image: Virtuelles Adressen Image mit Symbolen (Debugging)
 \end{itemize}
 
+\newpage
 \textbf{Laden des Image}\\
 
 Das erstellte Image kann nun mit Hilfe des \emph{GRMON} auf das Zielsystem geladen.\\
