@@ -1,29 +1,13 @@
-% \chapter{Zusammenfassung und Ausblick}\label{ch:schluss}
-%
-% In dieser Arbeit wird beschrieben, wie es ermöglicht wurde, per \ac{gps} und mithilfe des Beschleunigungssensors
-% ADXL 362 eine Positionsbestimmung innerhalb des PRHS-Framework durchzuführen. Dazu wurden zuerst sämtliche, einzubindende
-% Komponenten ausführlich beschrieben und dann auf der Hardwareseite angebunden. \\
-% Der \ac{gps}-Sensor wurde hierbei an einen sogenannten Pmod-Port angeschlossen und die vorhandene Pinkonfiguration
-% in das System eingetragen. Des Weiteren wurde für den \ac{gps}-Sensor ein Modul entwickelt,
-% welches per \ac{uart}-Schnittstelle mit dem System kommunizieren kann. In diesem Modul wurden zwei Untermodule
-% vereint und an den \ac{prhs}-Bus gekoppelt. Um nun die Kommunikation zwischen diesem Modul und dem System
-% sicherzustellen, wurde ein Treiber entwickelt, der es ermöglicht, die vom Sensor gesendeten Daten zu verstehen
-% und etwaigen Applikationen zur Verfügung zu stellen. Dabei kam unter anderem der \ac{gpsd} zum Einsatz, der die
-% Daten dem Betriebssystem, bereits im richtigen Format, zur Verfügung stellt.\\
-% Der Beschleunigungssensor, welcher sich bereits auf dem \ac{fpga}-Board befindet, wurde per
-% \ac{spi}-Schnittstelle angebunden. Es wird ein neues \ac{spi}-Modul angelegt und implementiert. Für
-% dieses wird ebenfalls ein Treiber entwickelt, welcher die Kommunikation herstellt. So kann das
-% System die Daten empfangen und interpretieren. Nachdem Erprobungen für die einzelnen Sensoren getätigt wurden,
-% wurde eine Demo-Applikation entwickelt, welche dem Nutzer per \ac{tui} die \ac{gps}- und Beschleunigungsdaten darstellt.\\
-% Es wurde erreicht, dass der Nutzer des Systems die \ac{gps}-Daten, wie zum Beispiel Längen- und Breitengrad,
-% sowie die Höhe über Normalnull und Geschwindigkeit, nicht nur in der Applikation einsehen, sondern sie auch
-% über den angelegten Deviceport weiter nutzen kann. Die Möglichkeit bietet der Beschleunigungssensor ebenfalls, welcher
-% neben den Daten der drei Achsen, zusätzlich die Temperatur anzeigt und diese für weitere Anwendungen nutzbar sind.\\
-% So können diese Daten in der Zukunft in sämtlichen Programmen und Anwendungen genutzt werden, wie zum Beispiel zur
-% Lokalisierung eines autonomen Systems. Um das gesamte Potenzial des Systems zu nutzen ist eine Weiterentwicklung
-% möglich und nötig.\\
-% Der \ac{gps}-Sensor, als auch der Beschleunigungssensor bieten die Möglichkeit weitere
-% Daten und Parameter zu empfangen und weiterzuverarbeiten. So stellt der \ac{gps}-Sensor, neben den oben genannten
-% und in der Applikation angezeigten Daten, etliche weitere Parameter zur Verfügung. Diese sind im Anhang in Form
-% des Datenblattes hinterlegt. Das bedeutet, dass sowohl der Umfang der Applikation, als auch die Einsatzgebiete
-% dieser Sensoren deutlich vergrößert werden können.
+\chapter{Zusammenfassung und Ausblick}\label{ch:schluss}
+
+In dieser Arbeit wurden grundsätzliche Themen, welche mit der SoftCore-Entwicklung zusammenhängen in Form der Grundlagen erläutert und zum Teil,
+ zum besseren Verständnis, grafisch dargestellt.\\
+Des Weiteren wurden die drei genannten Systeme näher erläutert und es wurde Schritt für Schritt erklärt, wie diese
+Systeme angepasst werden müssen, um eine Ausführung auf dem Digilent Nexys4 DDR \ac{fpga}-Board zu ermöglichen.
+Ebenfalls wurde beschrieben wie ein, zu den einzelnen Systemen passendes, Betriebssystem konfiguriert werden muss.\\
+Die Eigenschaften der drei SoftCores wurden jeweils kurz erläutert um eine gewissen Vergleichbarkeit herzustellen.
+Diese Vergleichbarkeit ist es, die eine auf dieser Arbeit basierende Betrachtung interessant macht. Neben den drei Systemen gibt es
+an der Professur für Technische Informatik an der Helmut-Schmidt-Universität / Universität Hamburg der Bundeswehr ein weiteres System,
+das sogenannte \ac{prhs}. Für dieses Framework steht ebenfalls ein Betriebssystem zur Verfügung, das \ac{l4prhs}. So würde es sich durchaus anbieten
+, auf Grund dieser Arbeit und dem hier an der Universtät vorhandenen Systems, einen Vergleich dieser Modell auf verschiedenen Ebenen durchzuführen. Mit Hilfe
+einer Benchmark könnte eine Analyse der Systeme, im Bezug auf Ergebnisse mit vorher festgelegtem Bezugswert, erstellt werden und in einer weiteren Arbeit festgehalten werden.
