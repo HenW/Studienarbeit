@@ -2,12 +2,16 @@
 \section{Softcore-Prozessoren}\label{kap:softcoreprozessoren}
 
 Ein SoftCore (engl. „Software-Kern“) ist ein Prozessor, Mikrocontroller oder ein Signalprozessor, welcher als virtuelle Einheit in einem \ac{fpga} oder \ac{asic} integriert wird.
-Dies bietet die Möglichkeit einem digitalen Schaltungsdesign jeden beliebigen Prozessor hinzuzufügen. Umgesetzt wird dieser Vorgang im \ac{fpga} durch reine Anwenderlogik,
+Dies bietet die Möglichkeit einem digitalen Schaltungsdesign jeden beliebigen Prozessor hinzuzufügen.\\
+Umgesetzt wird dieser Vorgang im \ac{fpga} durch reine Anwenderlogik,
 welche dementsprechend konfiguriert werden muss.\\
 Das typische Anwendungsgebiet eines SoftCores ist die Lösung von komplizierten Aufgaben, mit denen klassische „State Machines“ überfordert sind oder die Effektivität
  nicht mehr gegeben ist. Somit werden SoftCores oftmals nachträglich in bestehende Designs eingefügt, wenn deren Umfang sich extrem vergrößert hat.\cite{softcore}\\
 
 \subsection{Vergleich SoftCores und HardCores}\label{kap:vergleich}
+
+Vergleicht man den SoftCore- mit dem HardCore-Prozessor, lassen sich folgende Aussagen treffen:
+
 Vorteile:
 \begin{itemize}
    \item Flexible Anwendung: Das \ac{fpga} kann bei Bedarf mit einem SoftCore versehen werden, jedoch wird nicht von vorneherein Platz für einen HardCore verschwendet, welcher
@@ -25,12 +29,74 @@ Nachteile:
 Es gibt eine große Anzahl verschiedener SoftCores. Diese unterscheiden sich aber maßgeblich in der Größe der Datenpfade.
 Somit wird unterschieden zwischen 8-,16- und 32-Bit Systemen.\cite{softcore}\\
 
+\textbf{8-Bit SoftCores}\\
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|c|r|}
+  \hline
+  \textbf{Name} & \textbf{Quellcode} & \textbf{Hersteller}\\
+  \hline
+  LatticeMico8 & Verilog und VHDL & Lattice\\
+  \hline
+  PicoBlaze & VHDL & Xilinx\\
+  \hline
+  Proteus & VHDL & LogicSolutions\\
+  \hline
+\end{tabular}
+  \caption{8-Bit SoftCores nach ~\cite{softcore}}
+ \label{tab:8bitsysteme}
+  \end{table}
+
+  \textbf{16-Bit SoftCores}\\
+  \begin{table}[H]
+  \centering
+  \begin{tabular}{|l|c|r|}
+    \hline
+  \textbf{Name} & \textbf{Quellcode} & \textbf{Hersteller}\\
+    \hline
+    NEO430 & VHDL & neo430@GitHub\\
+    \hline
+    OpenMSP430 & Verilog & OpenCores\\
+    \hline
+    TG68 & VHDL & OpenCores\\
+    \hline
+  \end{tabular}
+    \caption{16-Bit SoftCores nach ~\cite{softcore}}
+   \label{tab:16bitsysteme}
+    \end{table}
+
+    \textbf{32-Bit SoftCores}\\
+    \begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|r|}
+      \hline
+    \textbf{Name} & \textbf{Quellcode} & \textbf{Hersteller}\\
+      \hline
+      LEON & VHDL & Gaisler Research\\
+      \hline
+      MicroBlaze & Nein & Xilinx\\
+      \hline
+      OpenRISC & Verilog & OpenCores\\
+      \hline
+      NIOS II & Nein & Altera\\
+      \hline
+    \end{tabular}
+      \caption{8-Bit SoftCores nach ~\cite{softcore}}
+     \label{tab:8bitsysteme}
+      \end{table}
+
+
+
+
+
+
+
 
 \section{Memory Management Unit}\label{kap:mmu}
 
-Bei der \ac{mmu} handelt es sich um einen so genannten Coprozessor, welcher die Speicherverwaltung des Arbeitsspeichers übernimmt. Umgesetzt wird diese Verwaltung mit
-Hilfe von Paging, welches virtuelle Adressen auf physikalische Adressen abbildet. Der gesamte Speicher wird in einzelne Speicherbereiche unterteilt und dann von der
-\ac{mmu} den jeweiligen Prozessen zugeteilt. Ebenfalls überwacht Sie die Einhaltung dieser Bereiche und unterbricht gegebenenfalls Instruktionen, die auf einen verbotenen
+Bei der \ac{mmu} handelt es sich um einen Hilfsbaustein des Betriebssystems, welcher die Speicherverwaltung des Arbeitsspeichers beschleunigt. Umgesetzt wird diese Verwaltung mit
+Hilfe eines Verfahren, welches virtuelle Adressen auf physikalische Adressen abbildet. Der gesamte Speicher wird in einzelne Speicherbereiche unterteilt und die
+\ac{mmu} überwacht die Einhaltung dieser Bereiche und unterbricht gegebenenfalls Instruktionen, die auf einen verbotenen
 Bereich zugreifen wollen.\cite{itwissen}\\
 
 \begin{figure}[H]
@@ -41,7 +107,7 @@ Bereich zugreifen wollen.\cite{itwissen}\\
 
 
  \section{Peripherie}\label{kap:peripherie}
- Ein Peripheriegerät kann einer Hardware hinzugefügt werden um die Fähigkeiten zu erweitern. Diese sind,im Gegensatz zu der Hardware, optional.
+ Ein Peripheriegerät kann einer Hardware hinzugefügt werden, um die Fähigkeiten zu erweitern. Diese Geräte sind optional und dienen zur Ein- und Ausgabe von Daten.
 
 \subsection{UART}\label{kap:uart}
 
@@ -50,7 +116,7 @@ Bei dieser Art der Kommunikation werden serielle Daten zwischen dem Board (\emph
 und dem Empfänger (\emph{Slave}) ausgetauscht. \\
 Dabei spielen die TxD und die RxD-Datenleitungen
 eine wichtige Rolle, da der Datenaustausch über diese Leitungen realisiert wird.\\
-Im Gegensatz zu einer \ac{spi}-Schnittstelle, wird kein Clock-Signal
+Im Gegensatz, zum Beispiel, zu einer \ac{spi}-Schnittstelle, wird kein Clock-Signal
 übertragen um Daten zu validieren. Des Weiteren wird die Verbindung mit einer definierten
 Geschwindigkeit realisiert, der sogenannten \emph{Baudrate}. \cite{uartpdf} \\
 Die Baudrate bezeichnet dabei die Anzahl der Bits, welche pro Sekunde übertragen werden.
@@ -73,7 +139,7 @@ Die Datenübertragung lässt sich nach~\ref{fig:uart} darstellen.\\
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.8\textwidth]{Hauptteil/uart.eps}
-\caption{Datenübertragung per \ac{uart} }
+\caption{Datenübertragung per \ac{uart}(8n1) }
 \label{fig:uart}
 \end{figure}
 
@@ -92,9 +158,16 @@ seine Arbeit und verarbeitet die Daten des Gerätes.\cite{irq}\\
 \caption{Interrupt-Controller}\label{fig:irq}
 \end{figure}
 
+\subsection{Timer}\label{kap:timer}
+
+Ein weiterer essenzieller Teil zur Ausführung eines Betriebssystems, wie zum Beispiel Linux, ist der Timer. Dieser hilft dem Betriebssystem dabei, das so genannte Scheduling
+durchzuführen. Hierbei wird mit Hilfe von \emph{Timer}-gesteuerten Interrupts dafür gesorgt, dass Nutzerprogramme, welche sich in der Ausführung befinden, unterbrochen werden und
+in den Betriebssystem-Modus geschaltet wird. Nun kann das Betriebssystem die anstehenden Prozesse neu planen.\\
+
+
 \section{Compiler}\label{kap:compiler}
 
-Der Compiler ist ein Werkzeug, welches den Quelltext, der mit Hilfe einer höheren Programmiersprache (C++, C, Java) geschrieben wurde, in Maschinenbefehle umsetzt. Damit der Prozessor diese Instruktionen ausführen kann, werden die lesbaren Programmierbefehle übersetzt. Nach dem so genannten kompilieren steht das Programm zur Ausführung bereit.
+Der Compiler ist ein Werkzeug, welches einen Quelltext, der in einer höheren Programmiersprache (C++, C, Java) geschrieben wurde, in Maschinenbefehle umsetzt. Damit der Prozessor diese Instruktionen ausführen kann, werden die lesbaren Programmierbefehle übersetzt. Nach dem so genannten kompilieren steht das Programm zur Ausführung bereit.
 Die Aufgaben des Compilers bestehen grundsätzlich aus drei Schritten:\cite{compiler}
 \begin{enumerate}
   \item Lexikalische Analyse:
@@ -104,6 +177,8 @@ Die Aufgaben des Compilers bestehen grundsätzlich aus drei Schritten:\cite{comp
   	Es folgt die Prüfung des Codes auf syntaktische Korrektheit.
   \item Semantische Analyse: Der Quelltext wird auf Sinnhaftigkeit geprüft. Zum Beispiel ob Befehle wirklich die korrekten Parameter haben.
 \end{enumerate}
+
+Im Vergleich zum Interpreter gibt es folgende Vor- und Nachteile.
 
 Vorteile:
 \begin{itemize}
@@ -126,14 +201,26 @@ Nachteile:
 
 \subsection{Compiler-Modi}\label{kap:compilermode}
 \begin{itemize}
-  \item Bare metal mode: Programme ohne Zugriff auf Ein- bzw. Ausgabegeräte. Programme, welche in diesem Modus ausgeführt werden, haben keine periphere Unterstützung
+  \item Non-OS mode: Programme ohne Zugriff auf Ein- bzw. Ausgabegeräte. Programme, welche in diesem Modus ausgeführt werden, haben keine periphere Unterstützung
         Der Bare-Metal-Mode wird meistens genutzt, um \ac{isa}- und Cache-Regressionstests durchzuführen. Hierbei entscheidet der Rückgabewert des Programmes über Erfolg beziehungsweise Misserfolg
         des Tests. \emph{0} bedeutet Erfolg, Zahlen ungleich \emph{0} geben den jeweiligen Fehlercode an. Bare-Metal-kompilierte Programm laufen auf einem \ac{fpga} und in einer Simulation
-        im Hintergrund.
-  \item Newlib mode: Programme mit Zugriff auf Ein- bzw. Ausgaberäte. Programme besitzen die Kontrolle der Peripheriegeräte, sind jedoch single-threaded. Ein Beispiel
-  für ein Programm, welches in diesem Modus kompiliert wird sind Bootloader.
+        im Hintergrund. \\
+        Um nun mit einem Bare-Metal-Programm eine Ausgabe zu erzeugen, müssen Bibliothkenen verwendet werden, welche die Art und Weise der Ausgabe beinhalten.\\
+
+        \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.4\textwidth]{Hauptteil/baremetal.eps}
+        \caption{Grafische Darstellung der Non-OS-Architektur}\label{fig:baremetal}
+        \end{figure}
+
   \item Linux mode: Benutzerprogramme mit Linux-Unterstützung. Mit Hilfe dieser Programme lassen sich Verhaltssimulationen auf dem \ac{fpga}-Board durchführen. Diese Programme
   erhalten Multi-Thread und Peripherie-Unterstützung vom Linux-Kernel\cite{lowrisc}\\
+
+  \begin{figure}[H]
+  \centering
+  \includegraphics[width=0.4\textwidth]{Hauptteil/linuxmode.eps}
+  \caption{Grafische Darstellung der Linux-Architektur}\label{fig:linuxmode}
+  \end{figure}
 \end{itemize}
 
 
@@ -180,10 +267,10 @@ Prozesse berücksichtigt werden müssen. \cite{ubuntu}\\
 
 Grafisch lässt sich der Aufbau wie folgt darstellen:\\
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
-\includegraphics[width=0.8\textwidth]{Hauptteil/bs.eps}
-\caption{Aufbau der einzelnen Komponenten nach \cite{mbs}}
+\includegraphics[width=0.55\textwidth]{Hauptteil/csa.eps}
+\caption{Computer System Architektur nach \cite{virtualmachines}}
 \label{fig:mbs}
 \end{figure}
 
@@ -227,13 +314,13 @@ Bei der Implementierung von Gerätetreibern wird zwischen drei Gerätetypen unte
 \subsubsection{Device Tree}\label{kap:devicetree}
 
 
-Der \emph{Device-Tree} ersetzt beim \ac{arm}-Prozessor das, was beim normalen PC das \ac{bios} ist. \\
-Er beinhaltet
-Informationen, welche dem Kernel beim Booten helfen. Da das System angeschlossene Geräte nicht automatisch erkennen
+Der \emph{Device-Tree} beinhaltet
+Informationen, welche dem Kernel bei dem Bootvorgang helfen. Da das System angeschlossene Geräte nicht automatisch erkennen
 und die dazu passenden Treiber laden kann, geschieht das in dieser \emph{.dts}-Datei. Durch das Kompilieren wird daraus
 der sogennante \emph{Device} \emph{Tree} \emph{Blob}. Dieser wird zusammen mit dem Kernel vom Bootloader geladen und im
 Hauptspeicher abgelegt. Im Anschluss daran wird daraus eine Baumstruktur. In dieser sind die Geräte als Knoten angelegt
-und die dazugehörigen Treiber werden geladen. Die Verbindung zwischen Device-Tree und dem Treiber wird über eine
+und es werden Informationen zu den dazugehörigen Treiber hinterlegt, welche dem Betriebssystem zur Verfügung gestellt werden.
+Die Verbindung zwischen Device-Tree und dem Treiber wird über eine
 eindeutige Identifikation per \emph{Compatible} festgelegt.
 
 
@@ -247,37 +334,88 @@ Erstellung sämtliche Optionen und Erweiterungen ab- beziehungsweise anwählen. 
 Das Tool wird größtenteils dafür genutzt, um die Systeme für andere Prozessoren, außer die klassischen x86-Prozessoren,
 zu erstellen, wie zum Beispiel \ac{arm}-Prozessoren.\cite{buildroot}\\
 
+\textbf{Toolchain}\\
+
+Bei der \emph{Toolchain} handelt es sich um eine Reihe von Tools zum Erstellen und Debuggen von Code für eine Zielarchitektur. Des Weiteren beinhaltet sie einen Compiler, einen Linker,
+ sowie verschiedene Bibliotheken.\\
+ Die Toolchain ist essenziell, um die drei weiteren Elemente eines eingebetteten Systems zu generieren: den Bootloader, den Kernel und das Root-Dateisystem. \\
+ Hierbei wird im wesentlichen zwischen zwei \emph{Toolchain}-Arten differenziert:
+ \begin{enumerate}
+   \item Die interne Toolchain: Die \emph{Toolchain} wird aus einer Quelle heraus vom \emph{Buildroot} generiert
+   \item die externe Toolchain: Es wird eine bereits vorhandene \emph{Toolchain} verwendet
+ \end{enumerate}
+
+Das generieren einer eigenen \emph{Toolchain} benötigt entsprechend mehr Zeit und verlängert den ganzen Kompiliervorgang, bietet jedoch deutlich mehr Konfigurationsmöglichkeiten
+im Vergleich zu bereits vorhandenen \emph{Toolchains}.\\
+
+\textbf{Kernel}\\
+
+Der \emph{Kernel}, welcher bereits in Kapitel~\ref{kap:linux} beschrieben wurde, kann ebenfalls durch \emph{Buildroot} konfiguriert und erzeugt werden.\\
+Dieser steuert alle Prozessor-und Speicherzugriffe, unterhält die wichtigsten Treiber und freift direkt auf die Hardware zu. Dadurch, dass er die unterste Schicht des Systems beschreibt,
+ist er die Basis in der Kommunikation zwischen Hard- und Software.\\
+Zu seinen Aufgaben gehören neben der parallelen Verarbeitung verschiedener Aufgaben, auch die Einhaltung zeitkritischer Grenzen, sowie die Offenheit für unterschiedlichste Anwendungen
+und Erweiterungen. Im Falle des Linux-Systems gilt der Kernel als Vermittler im System, so ist die grafische Oberfläche komplett unabhängig vom Linux-Kernel.\cite{datacenter}\\
+
+\textbf{Root-Dateisystem}\\
+
+Der Kernel enthält keine Programme oder Dämonen, die das System an sich nutzbar machen. Hierfür ist das \emph{Root-Dateisystem} zuständig.\\
+Wichtige Inhalte sind:
+\begin{itemize}
+  \item init-Dämon: Startet Dämonen, Systemeinstellungen sowie Login-Programmen
+  \item System-Konfiguration
+  \item Device-Nodes
+  \item Bibliotheken und Kernel-Module
+\end{itemize}
+
+Für die Zusammenstellung dieses Dateisystem kann \emph{Buildroot} verwendet werden, wodurch \emph{BusyBox} sowie weitere Programmpakete integriert werden.\cite{elektronikpraxis}\\
+
+\textbf{Bootloader}\\
+
+Der Bootloader, auch Boot Manager genannt, ist ein Programm, dessen Aufgabe es ist, das Betriebssystem in den Arbeitsspeicher zu laden. In diesem Fall ist er dafür verantwortlich,
+den Kernel mit den gewünschten Parametern zu laden und den Speicher zu initialisieren, bevor der eigentliche Boot-Prozess startet.\cite{searchdatacenter}\\
+
+\textbf{BusyBox}\\
+
+BusyBox kombiniert winzige Versionen vieler gängiger UNIX-Dienstprogramme in einer einzigen kleinen ausführbaren Datei.
+Es bietet Ersatz für die meisten Dienstprogramme, die normalerweise in GNU fileutils, Shellutils zu finden sind.
+Die Dienstprogramme in BusyBox haben im Allgemeinen weniger Optionen als ihre voll ausgestatteten GNU-Gegenstücke, welche jedoch die erwartete Funktionalität bieten und vom Verhalten sehr ähnlich sind.
+Ebenfalls bietet die BusyBox eine ziemlich vollständige Umgebung für eingebettete Systeme.\\
+BusyBox wurde größenoptimiert und für begrenzte Ressourcen geschrieben.
+Es ist auch extrem modular, so dass Befehle (oder Funktionen) zur Kompilierzeit ein- und ausgeschlossen werden können.
+Dies erleichtert die schnelle Anpassung der eingebetteten Systeme.\cite{busybox}\\
+
+
 \chapter{Soft Cores}\label{kap:softcores}
-\section{MicroBlaze}\label{kap:microblaze}
+\section{MicroBlaze basierte Systeme}\label{kap:microblaze}
 Microblaze
 
 Der MicroBlaze SoftCore von Xilinx ist eine 32-Bit RISC Harvard Architektur mit einem umfangreichen Befehlssatz und ist optimiert für eingebettete Anwendungen.
-Neben dieser Flexibilität besitzt er drei Voreinstellungen:
+Neben dieser Flexibilität besitzt er drei unterschiedliche Voreinstellungen:
 
 \begin{enumerate}
   \item Microcontroller: Geeignet für Baremetall-Code
         \begin{itemize}
-          \item 32-Bit Prozessorkern
+          \item 32-Bit Prozessorkern (in der Regel ohne \ac{mmu})
           \item Externer Speichercontroller
-          \item SPI Controller
+          \item \ac{spi} Controller
           \item I2C-Controller
-          \item UART
+          \item \ac{uart}
           \item Interrupt-Controller
           \item  Timer
         \end{itemize}
   \item Echtzeitprozessor: Deterministische Echtzeitverarbeitung auf einem \ac{rtos}
     \begin{itemize}
-      \item Alle Mikrocontroller Preset Blöcke
+      \item Alle Mikrocontroller Blöcke
       \item Instruktioncache
-      \item Speicherschutzeinheit
+      \item \ac{mpu}
       \item Datencache
       \item DDR-Controller
       \end{itemize}
   \item Anwendungsprozessor: Embedded Linux-fähig
         \begin{itemize}
-          \item Alle Echtzeit-Prozessor-Preset-Blöcke
+          \item Alle Echtzeit-Prozessor-Blöcke
           \item 32-Bit-Prozessorkern
-          \item Speicherverwaltungseinheit
+          \item \ac{mmu}
           \item Ethernet-Controller
         \end{itemize}
 \end{enumerate}
@@ -288,14 +426,15 @@ Ausgehend von diesen Presets lässt sich das Design mit Hilfe von spezifischen P
 
 Zusammengefasst besitzt der Microblaze folgende Schlüsselfähigkeiten:
 \begin{itemize}
-  \item 32-Bit-Befehlssatz und allgemeine Register
+  \item 32 mal 32-Bit-\emph{General-Purpose}-Register
+  \item 32-Bit-Befehlswort mit drei Operanden und zwei Adressierungsmodi
   \item 32-Bit-Adressbus, erweiterbar auf 64-Bit
-  \item Lockstep und TMP-fähig
   \item Optionale \ac{fpu}
+  \item \ac{axi}4-Interface
   \item Verschiedene Zustandsmodi (Sleep, Hibernate, Suspend Mode/Instrctions)
   \item Unterstützt entweder \ac{plb}- oder \ac{axi}-Schnittstellen
   \item Big-Endian / Little-endian Unterstützung
-  \item Optionale \ac{mmu}
+  \item Optionale \ac{mmu}, sowie separate, konfigurierbare Daten- und Instruktionscaches
 \end{itemize}
 
 
@@ -376,7 +515,7 @@ Durch die Schaltfläche \emph{Regenerate Layout} kann das Diagram neu angeordnet
 
 \textbf{Manuelle Verbindungen}\\
 
-Der angelegte Interrupt Controller ist mit einem Concat verbunden, auf dessen Eingänge manuell die Interruptleitungen des \ac{axi} Uartlite und des \ac{axi} Timers gelegt werden.
+Der angelegte Interrupt Controller ist mit einem \emph{Concat} verbunden, auf dessen Eingänge manuell die Interruptleitungen des \ac{axi} Uartlite und des \ac{axi} Timers gelegt werden.
 Die Verbindungen sind im folgenden Bild orange gekennzeichnet.\\\\
 
 \begin{figure}[H]
@@ -568,7 +707,7 @@ Hierzu muss innerhalb des Shells in den korrekten Ordner navigiert werden.
 
 das Image heruntergeladen werden.
 \newpage
-\section{lowRISC}\label{kap:lowrisc}
+\section{lowRISC basierte Systeme}\label{kap:lowrisc}
 
 \textbf{Installation der benötigten Tools}
 
@@ -724,7 +863,7 @@ BusyBox wird im Root-Image genutzt um die grundlegende Shell-Umgebung bereitzust
 cd $TOP/riscv-tools
 curl -L http://busybox-net/downloads/busybox-1.21.1.tar.bz2 | tar -xJ
 cd busybox-1.21.1
-cp $TOP/risscv-tools/busybox_config .config
+cp $TOP/riscv-tools/busybox_config .config
 make -j(Anzahl Prozessorkerne)
 \end{lstlisting}
 
@@ -779,7 +918,7 @@ Es sollte als Ausgabe Hello World erscheinen.\\
 
 \textbf{Vorbereiten des eigenen Images}\\
 
-Um RISC-V Linux zu starten, werden drei Dateien auf der SD-Karte benötigt:
+Um RISC-V Linux zu starten, werden drei Dateien auf der im \ac{fat}-formatierten SD-Karte benötigt:
 \begin{enumerate}
   \item boot: Der Bootloader(Berkeley bootloader) um den Linux Kernel zu laden
   \item vmlinux: Der RISC-V Linux Kernel
@@ -790,27 +929,29 @@ Um RISC-V Linux zu starten, werden drei Dateien auf der SD-Karte benötigt:
 Der Linux Kernel und das Image können über das Terminal auf die SD-Karte kopiert werden.
 
 \begin{lstlisting}
-Cd $TOP/riscv-tools
-Cp linux-3.14.41/vmlinux /(Pfad der SD-Karte)/vmlinux
-Cp busybox-1.21.1/root.bin /(Pfad der SD-Karte/root.bin
+cd $TOP/riscv-tools
+cp linux-3.14.41/vmlinux /(Pfad der SD-Karte)/vmlinux
+cp busybox-1.21.1/root.bin /(Pfad der SD-Karte/root.bin
 \end{lstlisting}
 
 
 Der fehlende Bootloader kann wie folgt generiert werden:\\
 
 \begin{lstlisting}
-Cd $TOP/fpga/board/nexys4
-Make bbl
-Cp bbl/bbl /(Pfad der SD-Karte)/boot
+cd $TOP/fpga/board/nexys4
+make bbl
+cp bbl/bbl /(Pfad der SD-Karte)/boot
 \end{lstlisting}
 
+Nachdem das Board, sowie die SD-Karte programmiert wurden, kann die SD-Karte in das Board gesteckt werden und mit Hilfe des \emph{CPU Reset} ein Neustart der CPU erreicht werden.
+Nun sollte auf dem \emph{Minicom} das lowRISC boot program zu sehen sein und Linux starten.\\
 \newpage
 
-\section{LEON3}\label{kap:leon3}
+\section{LEON3 basierte Systeme}\label{kap:leon3}
 
 Der LEON3 ist das \ac{vhdl}-Modell eines 32-Bit-Prozessors, welcher auf der SPARC V8-Architektur basiert. Das Modell ist in großem Umfang konfigurierbar und besonders für \ac{soc}-Desgings geeignet.
 Ursprünglich wurde dieses System von der \ac{esa} entworfen, wird heutzutage jedoch von \emph{Aeroflex Gaisler} weiterentwickelt und vertrieben.\\
-Der LEON3-Prozessor verführt über folgende Eigenschaften:\cite{leon}\\
+Der LEON3-Prozessor verfügt über folgende Eigenschaften:\cite{leon}\\
 
 \begin{itemize}
   \item SPARC V8 Befehlssatz mit V8e Erweiterungen
@@ -828,7 +969,7 @@ Der LEON3-Prozessor verführt über folgende Eigenschaften:\cite{leon}\\
 \item Robustes und vollsynchrones Single-Edge-Clock-Design
 \item Bis zu 125 MHz in FPGA und 400 MHz in 0,13 um \ac{asic}-Technologien
 \item Fehlertolerante und SEU-geschützte Version für Raumfahrtanwendungen
-\item Ausführlich konfigurierbar
+\item umfangreich konfigurierbar
 \item Große Auswahl an Software-Tools: Compiler, Kernel, Simulatoren und Debug-Monitore
 \item Hohe Leistung: 1,4 DMIPS / MHz, 1,8 CoreMark / MHz (gcc -4.1.2)
 \end{itemize}
@@ -1003,7 +1144,7 @@ Erkärung der einzelnen Parameter:
   \item baud \emph{baudrate}: Nutzen der angegebenen Baudrate. Die Standardeinstellung liegt bei 115200 baud. Höhere Baudraten benötigen eine entsprechende Unterstützung des Zielsystems.
   \item uart \emph{device}: Standardmäßig nutzt der GRMON den ersten \ac{uart}-Port des Hostrechners. Diese Einstellung kann mit Hilfe der speziellen Angabe überschrieben werden und so sichergestellt werden, dass mit dem gewünschten Gerät kommuniziert wird.
   \item u [device]: Dieser Befehl versetzt den UART1-Port in den FIFO-Debug Modus, wenn die Hardware es unterstützt. Ist dies nicht gegeben, wird der Loop-back-Modus aktiviert. Dieser Modus ermöglicht es via GRMON über den \ac{uart} zu kommunizieren.
-  \item nb: Das System soll bei sogenannten „Error Traps“ nicht anhalten.
+  \item nb: Das System soll bei sogenannten „Error Traps“ nicht anhalten. Dieser Punkt ist besonders wichtig für die Ausführung von Linux.
 \end{itemize}
 \newpage
 Nach dem Start können durch den Befehl\\
@@ -1056,7 +1197,7 @@ Das passende Linux Image für das LEON3-System wird am einfachsten mit LINUXBUIL
 \textbf{Linux Toolchain}\\
 
 Bevor LINUXBUILD konfiguriert und genutzt werden kann, muss die SPARC/LEON Linux Toolchain installiert werden.
-Diese kann direkt von der Seite \url{ http://gaisler.com/anonftp/linux/linux-2.6/toolchains/} heruntergeladen werden Hierbei sollte die Kompatibilität von Toolchain und Linuxkernel beachtet werden.\\
+Diese kann direkt von der Seite \url{ http://gaisler.com/anonftp/linux/linux-2.6/toolchains/} heruntergeladen werden Hierbei sollte die Kompatibilität der Versionen von Toolchain und Linuxkernel beachtet werden.\\
 Die Toolchain muss in dem Ordner \emph{/opt} installiert werden, da sonst die Umgebungsvariablen zu Fehlern führen können. Als Beispiel ist das Zielverzeichnis für die sparc-gaisler-linux4.9 Toolchain der Ordner \emph{/opt/sparc-gaisler-linux4.9}.
 Dieses Verzeichnis muss jetzt als Pfad angegeben werden.\\
 

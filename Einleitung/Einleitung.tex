@@ -5,7 +5,7 @@ Jahrzehnten zurückblicken. Jedoch ist diese Technik mittlerweile so hochentwick
 schwieriger wird, die Bauteile noch schneller, kleiner und effizienter herzustellen, denn auch hier gibt es Grenzen.
 So liegt es an den Entwicklern neue Wege zu finden, um diese Beschränkungen zu umgehen. \\
 So kam es zur Entwicklung der \acp{fpga}, welche es nun ermöglichen sollten, komplexe Logikschaltungen
-rekonfigurierbar herzustellen, sodass diese jederzeit erneuert, verändert und damit den Gegebenheiten und
+rekonfigurierbar herzustellen, sodass diese jederzeit verändert und damit den Gegebenheiten und
 Anforderungen angepasst werden konnten. Durch die Optimierung während der Laufzeit können Kosten gesenkt und
 Ressourcen geschont werden. Mittlerweile sind moderne \acp{fpga} mit genügend Recourcen ausgestattet um eine
 große Anzahl an Logikgattern zu berechnen und sind in der Lage komplexe Rechenoperationen durchzuführen.\\
@@ -21,7 +21,7 @@ Neben der Hardware sollte auf jedem der Systeme das Betriebsystem Linux ausgefü
 
  \section{Struktur der Arbeit}\label{kap:strukturderarbeit}
 
-Zur Dokumentation des Vorgehens, wird die Arbeit wie folgt gegliedert.\\
+Zur Beschreibung des Vorgehens, wird die Arbeit wie folgt gegliedert.\\
  Zu Beginn der Arbeit werden im Kapitel \ref{kap:grundlagen} die theoretischen Grundlagen vermittelt. Als
 Ausgangspunkt wird im Kapitel~\ref{kap:softcoreprozessoren} auf die Definition und den Unterschied zwischen SoftCore- beziehungsweise HardCore-Prozessoren eingegangen,
 gefolgt von einer näheren Erklärung der \ac{mmu} in Kapitel~\ref{kap:mmu}. Die Kommunikation zwischen
@@ -41,7 +41,7 @@ eines Betriebssystems genutzt werden kann.\\
 Die praktische Implementierung in Kapitel~\ref{kap:softcores} gliedert sich in drei Teile.
 Im ersten Teil geht es um die Implementierung des Xilinx MicroBlaze-Prozessor(Kapitel~\ref{kap:microblaze}),
 sowie die Ausführung des erzeugten Linuxsystems(\ref{kap:mcausführenlinux}).
-In Kapitel~\ref{kap:lowrisc} wird Schritt für Schritt erklärt, wie das System zu konfigurieren ist. Des Weiteren wird
+In Kapitel~\ref{kap:lowrisc} wird Schritt für Schritt erklärt, wie das \emph{lowRISC}-System zu konfigurieren ist. Des Weiteren wird
 in diesem Kapitel auf die Generierung des dazugehörigen Linux eingegangen. Ähnlich aufgebaut ist das Kapitel~\ref{kap:leon3}, in welchem
 erst die Hardware(\ref{kap:leon3hardware}) des LEON3 und anschließend in Kapitel~\ref{kap:linuxleon} das passende Betriebssystem näher erläutert wird.\\
 Im Kapitel~\ref{ch:schluss} wird die Arbeit noch einmal zusammengefasst und ein kurzer Ausblick gegeben.\\
