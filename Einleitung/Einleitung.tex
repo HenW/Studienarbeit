@@ -7,7 +7,7 @@ So liegt es an den Entwicklern neue Wege zu finden, um diese Beschränkungen zu 
 So kam es zur Entwicklung der \acp{fpga}, welche es nun ermöglichen sollten, komplexe Logikschaltungen
 rekonfigurierbar herzustellen, sodass diese jederzeit verändert und damit den Gegebenheiten und
 Anforderungen angepasst werden konnten. Durch die Optimierung während der Laufzeit können Kosten gesenkt und
-Ressourcen geschont werden. Mittlerweile sind moderne \acp{fpga} mit genügend Recourcen ausgestattet um eine
+Ressourcen geschont werden. Mittlerweile sind moderne \acp{fpga} mit genügend Recourcen ausgestattet, um eine
 große Anzahl an Logikgattern zu berechnen und sind in der Lage komplexe Rechenoperationen durchzuführen.\\
 
 \section{Ziel der Arbeit}\label{kap:zielderarbeit}
@@ -30,12 +30,12 @@ Unterkapitel befinden sich im Abschnitt(\ref{kap:peripherie}).
 Dies beinhaltet die im Rahmen dieser Arbeit genutzte Schnittstelle \ac{uart}, welche zur Kommunikation mit dem
 Zielsystem benötigt wird(\ref{kap:uart}). Ebenfalls sind die sogenannten Interrupts ein wichtiger
 Bestandteil dieser Systeme, nähe beschrieben in Kapitel ~\ref{kap:interrupt}.
-Auf Seiten der Software wurde näher auf Funktionsweise eines Compilers(\ref{kap:compiler}) eingegangen und in diesem Fall
+Auf Seiten der Software wurde näher auf die Funktionsweise eines Compilers(\ref{kap:compiler}) eingegangen und in diesem Fall
 besonders auf die verschiedenen Modi des Compilers(\ref{kap:compilermode}).
-Das Kapitel~\ref{kap:linux} erklärt grob die
+Das Kapitel~\ref{kap:linux} erklärt die
 Funktionsweise eines Betriebssystems, wie hier anhand des Beispiels Linux. Hierbei gibt es drei Unterkapitel.
 Das Kapitel~\ref{kap:treiber}, welches die wesentlichen Eigenschaften und Funktionsweisen
-eines Treibers erläutert, gefolgt von dem Kapitel ~\ref{kap:devicetree} und dem Kapitel~\ref{kap:buildroot}.
+eines Treibers erläutert, gefolgt von dem Kapitel~\ref{kap:devicetree} in dem der Device Tree näher beschrieben wird, sowie dem Kapitel~\ref{kap:buildroot}, welches das sogenannte Buildroot erklärt.
 Dieses beschreibt ein Tool, welches zu Erzeugung
 eines Betriebssystems genutzt werden kann.\\
 Die praktische Implementierung in Kapitel~\ref{kap:softcores} gliedert sich in drei Teile.
@@ -43,5 +43,5 @@ Im ersten Teil geht es um die Implementierung des Xilinx MicroBlaze-Prozessor(Ka
 sowie die Ausführung des erzeugten Linuxsystems(\ref{kap:mcausführenlinux}).
 In Kapitel~\ref{kap:lowrisc} wird Schritt für Schritt erklärt, wie das \emph{lowRISC}-System zu konfigurieren ist. Des Weiteren wird
 in diesem Kapitel auf die Generierung des dazugehörigen Linux eingegangen. Ähnlich aufgebaut ist das Kapitel~\ref{kap:leon3}, in welchem
-erst die Hardware(\ref{kap:leon3hardware}) des LEON3 und anschließend in Kapitel~\ref{kap:linuxleon} das passende Betriebssystem näher erläutert wird.\\
+erst die Hardware (\ref{kap:leon3hardware}) des LEON3 und anschließend, in Kapitel~\ref{kap:linuxleon}, das passende Betriebssystem näher erläutert werden..\\
 Im Kapitel~\ref{ch:schluss} wird die Arbeit noch einmal zusammengefasst und ein kurzer Ausblick gegeben.\\

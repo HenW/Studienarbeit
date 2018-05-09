@@ -111,7 +111,7 @@ Bereich zugreifen wollen.\cite{itwissen}\\
 
 \subsection{UART}\label{kap:uart}
 
-Um mit Peripheriegeräten zu kommunizieren, kann \ac{uart} als serielle Schnittstelle genutzt.
+Um mit Peripheriegeräten zu kommunizieren, kann \ac{uart} als serielle Schnittstelle genutzt werden.
 Bei dieser Art der Kommunikation werden serielle Daten zwischen dem Board (\emph{Master})
 und dem Empfänger (\emph{Slave}) ausgetauscht. \\
 Dabei spielen die TxD und die RxD-Datenleitungen
@@ -167,7 +167,8 @@ in den Betriebssystem-Modus geschaltet wird. Nun kann das Betriebssystem die ans
 
 \section{Compiler}\label{kap:compiler}
 
-Der Compiler ist ein Werkzeug, welches einen Quelltext, der in einer höheren Programmiersprache (C++, C, Java) geschrieben wurde, in Maschinenbefehle umsetzt. Damit der Prozessor diese Instruktionen ausführen kann, werden die lesbaren Programmierbefehle übersetzt. Nach dem so genannten kompilieren steht das Programm zur Ausführung bereit.
+Der Compiler ist ein Werkzeug, welches einen Quelltext, der in einer höheren Programmiersprache (C++, C, Java) geschrieben wurde, in Maschinenbefehle umsetzt.
+ Damit der Prozessor diese Instruktionen ausführen kann, werden die lesbaren Programmierbefehle übersetzt. Nach dem so genannten Kompilieren steht das Programm zur Ausführung bereit.
 Die Aufgaben des Compilers bestehen grundsätzlich aus drei Schritten:\cite{compiler}
 \begin{enumerate}
   \item Lexikalische Analyse:
@@ -200,8 +201,11 @@ Nachteile:
 \end{figure}
 
 \subsection{Compiler-Modi}\label{kap:compilermode}
+
+Der im Kapitel zuvor beschriebene Compiler kann, je nach Zielsystem, in verschiedenen Modi betrieben werden. Hier bei ist der ausschlaggebende Punkt, ob auf dem System ein Betriebssystem ausgeführt werden soll oder nicht.\\
+
 \begin{itemize}
-  \item Non-OS mode: Programme ohne Zugriff auf Ein- bzw. Ausgabegeräte. Programme, welche in diesem Modus ausgeführt werden, haben keine periphere Unterstützung
+  \item Non-OS mode: Programme ohne Zugriff auf Ein- bzw. Ausgabegeräte. Programme, welche in diesem Modus ausgeführt werden, haben keine periphere Unterstützung.
         Der Bare-Metal-Mode wird meistens genutzt, um \ac{isa}- und Cache-Regressionstests durchzuführen. Hierbei entscheidet der Rückgabewert des Programmes über Erfolg beziehungsweise Misserfolg
         des Tests. \emph{0} bedeutet Erfolg, Zahlen ungleich \emph{0} geben den jeweiligen Fehlercode an. Bare-Metal-kompilierte Programm laufen auf einem \ac{fpga} und in einer Simulation
         im Hintergrund. \\
@@ -232,7 +236,7 @@ Nachteile:
 Das verwendete System Linux wurde als freies Betriebssystem von Linus Benedict Torvald entwickelt.
 Es basiert auf dem Unix-Modell, jedoch schrieb Torvald den sogenannten Kernel neu. Seit dem gilt
 Linux als Open-Source-Projekt und Entwickler versuchen stetig das System zu verbessern.\cite{linux}\\
-Die wohl wichtigste Eigenschaft die Linux bzw. Unix für den Einsatz beliebt machen ist die Portabilität,
+Die wohl wichtigste Eigenschaft die Linux bzw. Unix für den Einsatz beliebt macht, ist die Portabilität,
 da es weitestgehend rechnerunabhängig läuft. Weitere Eigenschaften die das Betriebssystem zu einem der
  weitverbreitetsten Systeme überhaupt gemacht haben, sind:\\\cite{linux}\\
 \begin{itemize}
@@ -311,7 +315,7 @@ Bei der Implementierung von Gerätetreibern wird zwischen drei Gerätetypen unte
 \end{enumerate}
 
 
-\subsubsection{Device Tree}\label{kap:devicetree}
+\subsection{Device Tree}\label{kap:devicetree}
 
 
 Der \emph{Device-Tree} beinhaltet
@@ -345,13 +349,13 @@ Bei der \emph{Toolchain} handelt es sich um eine Reihe von Tools zum Erstellen u
    \item die externe Toolchain: Es wird eine bereits vorhandene \emph{Toolchain} verwendet
  \end{enumerate}
 
-Das generieren einer eigenen \emph{Toolchain} benötigt entsprechend mehr Zeit und verlängert den ganzen Kompiliervorgang, bietet jedoch deutlich mehr Konfigurationsmöglichkeiten
+Das Generieren einer eigenen \emph{Toolchain} benötigt entsprechend mehr Zeit und verlängert den ganzen Kompiliervorgang, bietet jedoch deutlich mehr Konfigurationsmöglichkeiten
 im Vergleich zu bereits vorhandenen \emph{Toolchains}.\\
 
 \textbf{Kernel}\\
 
 Der \emph{Kernel}, welcher bereits in Kapitel~\ref{kap:linux} beschrieben wurde, kann ebenfalls durch \emph{Buildroot} konfiguriert und erzeugt werden.\\
-Dieser steuert alle Prozessor-und Speicherzugriffe, unterhält die wichtigsten Treiber und freift direkt auf die Hardware zu. Dadurch, dass er die unterste Schicht des Systems beschreibt,
+Dieser steuert alle Prozessor-und Speicherzugriffe, unterhält die wichtigsten Treiber und greift direkt auf die Hardware zu. Dadurch, dass er die unterste Schicht des Systems beschreibt,
 ist er die Basis in der Kommunikation zwischen Hard- und Software.\\
 Zu seinen Aufgaben gehören neben der parallelen Verarbeitung verschiedener Aufgaben, auch die Einhaltung zeitkritischer Grenzen, sowie die Offenheit für unterschiedlichste Anwendungen
 und Erweiterungen. Im Falle des Linux-Systems gilt der Kernel als Vermittler im System, so ist die grafische Oberfläche komplett unabhängig vom Linux-Kernel.\cite{datacenter}\\
@@ -361,7 +365,7 @@ und Erweiterungen. Im Falle des Linux-Systems gilt der Kernel als Vermittler im 
 Der Kernel enthält keine Programme oder Dämonen, die das System an sich nutzbar machen. Hierfür ist das \emph{Root-Dateisystem} zuständig.\\
 Wichtige Inhalte sind:
 \begin{itemize}
-  \item init-Dämon: Startet Dämonen, Systemeinstellungen sowie Login-Programmen
+  \item init-Dämon: Startet Dämonen, Systemeinstellungen sowie Login-Programme
   \item System-Konfiguration
   \item Device-Nodes
   \item Bibliotheken und Kernel-Module
@@ -381,7 +385,7 @@ Es bietet Ersatz für die meisten Dienstprogramme, die normalerweise in GNU file
 Die Dienstprogramme in BusyBox haben im Allgemeinen weniger Optionen als ihre voll ausgestatteten GNU-Gegenstücke, welche jedoch die erwartete Funktionalität bieten und vom Verhalten sehr ähnlich sind.
 Ebenfalls bietet die BusyBox eine ziemlich vollständige Umgebung für eingebettete Systeme.\\
 BusyBox wurde größenoptimiert und für begrenzte Ressourcen geschrieben.
-Es ist auch extrem modular, so dass Befehle (oder Funktionen) zur Kompilierzeit ein- und ausgeschlossen werden können.
+Es ist auch extrem modular, sodass Befehle (oder Funktionen) zur Kompilierzeit ein- und ausgeschlossen werden können.
 Dies erleichtert die schnelle Anpassung der eingebetteten Systeme.\cite{busybox}\\
 
 
@@ -441,10 +445,11 @@ Zusammengefasst besitzt der Microblaze folgende Schlüsselfähigkeiten:
 \subsection{Erstellen der Hardwarekonfiguration}\label{kap:microblazehardware}
 
 
-\textbf{Erstellen eines Projekts}\\\\
+\textbf{Erstellen eines Projekts}\\
+
 Starten Sie Vivado und wählen Sie \emph{New Project} aus.
 Hierbei wählt man \emph{RTL Project} als Projekttyp, wobei der Haken bei \emph{"Do not specify sources at this time"} gesetzt sein sollte.\\
-Nun gilt es unter dem Tab \emph{Boards} das korrekte Board auszuwählen, in meinem Fall war es das Nexys4 DDR.
+Nun gilt es unter dem Tab \emph{Boards} das korrekte Board auszuwählen, in diesem Fall das Nexys4 DDR.
 Anschließend klicken Sie auf \emph{Finish} und das Projekt wird erstellt.\\
 
 
@@ -501,7 +506,7 @@ Die bestehende Verbindung zwischen der SysClock und dem MIG muss gelöscht werde
 \textbf{Block Automation}\\
 
 Ab hier greift die \emph{Block Automation} ein, bei der die im nachfolgenden Bild angezeigten Einstellungen zu übernehmen sind.
-Besonders wichtig ist hier die Auswahl des Interrupt Controller.
+Besonders wichtig ist hier die Auswahl des Interrupt Controllers.
 
 \begin{figure}[H]
 \centering
@@ -534,7 +539,7 @@ Der sogenannte MicroBlaze Configuration Wizard ermöglicht es, bereits voreinges
   \item Minimum Area: Minimaler MicroBlaze Core, kein Cache und kein Debug
   \item Maximum Performance: Maximale Leistung, großer Cache und Debug
   \item Maximum Frequency: Maximale Frequenz, kein Cache und kein Debug mit wenigen Ausführungseinheiten
-  \item Linux with \ac{mmu}: Hohe Leistung, Linux-optimiert,\ac{mmu} aktiviert, großer Cache und Debug
+  \item Linux with \ac{mmu}: Hohe Leistung, Linux-optimiert, \ac{mmu} aktiviert, großer Cache und Debug
   \item Low-end Linux with \ac{mmu}: Für low-end-Systeme, \ac{mmu} aktiviert, kleiner Cache und Debug
   \item Typical: Kompromiss zwischen Leistung, Frequenz und Größe
   \item Frequency Optimized: Bestmögliche Frequenz, \ac{mmu} aktiviert
@@ -634,7 +639,7 @@ Hierzu sind beide Dateien im Texteditor zu öffnen, um die \emph{.dts}
 
 Das bereits genannte Buildroot kann unter \url{https://buildroot.org/download.html} heruntergeladen werden.
 Das in dieser Arbeit verwendete Buildtool besitzt die Version 2018.02.\\
-Neben dem Buildroot werden Linux Kernel \emph{defonfig}-Dateien benötigt, welche für das Nexys4 angepasst wurden und auf folgenden Github zur Verfügung stehen :
+Neben dem Buildroot werden Linux Kernel \emph{defconfig}-Dateien benötigt, welche für das Nexys4 angepasst wurden und auf folgenden Github zur Verfügung stehen :
 
 \url{https://github.com/HenW/microblaze/tree/master}
 
@@ -667,7 +672,7 @@ Um den Kernel und das passende Filesystem zu erstellen, wird der Befehl \emph{ma
 
 Dieser Vorgang benötigt je nach Rechenleistung einige Minuten.
 Nach erfolgreichem Abschluss des Vorgangs wird eine „simpleImage.artix7“-Datei erstellt,
-welche zum booten des Linux auf dem Nexys4 DDR Artix7 \ac{fpga} Modul benötigt wird.
+welche zum Booten des Linux auf dem Nexys4 DDR Artix7 \ac{fpga} Modul benötigt wird.
 
 \subsection{Ausführen des Linux Images auf dem Artix7}\label{kap:mcausführenlinux}
 
@@ -680,7 +685,7 @@ die \ac{sdk} Shell leicht zu erreichen ist. Das \ac{fpga}-Board wird nun mit dem
 
 \textbf{Starten der \ac{xmd}-Engine}\\
 
-Um die Verbindung zu prüfen kann, nachdem das \ac{fpga}-Board programmiert wurde, ein Hello World Programm ausgeführt werden. Andernfalls kann direkt im SDK über Xilinx Tools, beziehungsweise  „Launch Shell“ ein Terminal geöffnet werden.\\
+Um die Verbindung zu prüfen, kann, nachdem das \ac{fpga}-Board konfiguriert wurde, ein Hello World Programm ausgeführt werden. Andernfalls kann direkt im SDK über Xilinx Tools, beziehungsweise  „Launch Shell“ ein Terminal geöffnet werden.\\
 
 Mit dem Befehl:
 
@@ -721,7 +726,7 @@ Um die RISC-V Tools erstellen zu können, werden verschiedene Pakete benötigt, 
   \item libgmp-dev: siehe libmpfr-dev
   \item gawk: GNU-Projekt Implementierung der AWK Programmiersprache
   \item build-essentials: Benötigte Pakete zur Kompilierung eines Pakets
-  \item bison: YACC-kompatibeler Parser-Generator
+  \item bison: YACC-kompatibler Parser-Generator
   \item flex: schneller lexikalischer-Analysator
   \item texinfo: hypertextfähiges Dokumentationssystem
   \item gperf: Hash-Funktionsgenerator
@@ -812,7 +817,7 @@ cd $TOP/riscv-tools/riscv-gnu-toolchain
 #wenn der Ordner "build" bereits existiert, kann der nächste Schritt ignoriert werden
 mkdir build
 cd build
-../configure –prefix=\$RISCV
+../configure --prefix=$RISCV
 make –j(Anzahl Prozessorkerne) linux
 \end{lstlisting}
 
@@ -868,7 +873,7 @@ make -j(Anzahl Prozessorkerne)
 \end{lstlisting}
 
 
-Wurde die Kompilierung erfolgreich abgeschlossen, wurde die Binärdatei im selben Verzeichnis generiert.\\
+Nachdem die Kompilierung erfolgreich abgeschlossen, wurde die Binärdatei im selben Verzeichnis generiert.\\
 
 \begin{lstlisting}[caption={BusyBox},label={code:busybox}]
 ls -l busybox
@@ -904,10 +909,10 @@ make hello
 \end{lstlisting}
 
 
-Anschließend befindet sich im Verzeichnis \emph{lowrisc-chip-imp/lowrisc-chip-imp.runs/impl\_1} eine \emph{chip\_top.new.bit}-Datei, welche auch zum konfigurieren des FPGA genutzt werden sollte.
-Mit Hilfe von Vivado kann der FPGA mit der Bitstream-Datei programmiert werden.
+Anschließend befindet sich im Verzeichnis \emph{lowrisc-chip-imp/lowrisc-chip-imp.runs/impl\_1} eine \emph{chip\_top.new.bit}-Datei, welche auch zum Konfigurieren des FPGA genutzt werden sollte.
+Mit Hilfe von Vivado kann der FPGA mit der Bitstream-Datei konfiguriert werden.
 
-Der \emph{Minicom} wird genutzt um die \ac{uart}-Schnittstelle zu testen.\\
+Der \emph{Minicom} wird genutzt, um die \ac{uart}-Schnittstelle zu testen.\\
 
 \begin{lstlisting}[caption={Aufruf des \emph{Minicom}},label={code:minicom}]
 minicom -D /dev/(passende USB-Schnittstelle)
@@ -949,7 +954,7 @@ Nun sollte auf dem \emph{Minicom} das lowRISC boot program zu sehen sein und Lin
 
 \section{LEON3 basierte Systeme}\label{kap:leon3}
 
-Der LEON3 ist das \ac{vhdl}-Modell eines 32-Bit-Prozessors, welcher auf der SPARC V8-Architektur basiert. Das Modell ist in großem Umfang konfigurierbar und besonders für \ac{soc}-Desgings geeignet.
+Der LEON3 ist das \ac{vhdl}-Modell eines 32-Bit-Prozessors, welcher auf der SPARC V8-Architektur basiert. Das Modell ist in großem Umfang konfigurierbar und besonders für \ac{soc}-Designs geeignet.
 Ursprünglich wurde dieses System von der \ac{esa} entworfen, wird heutzutage jedoch von \emph{Aeroflex Gaisler} weiterentwickelt und vertrieben.\\
 Der LEON3-Prozessor verfügt über folgende Eigenschaften:\cite{leon}\\
 
@@ -1025,7 +1030,7 @@ Durch die vorherigen Schritte wurde eine „Allzweck-Konfiguration“ vorgenomme
   dsu & 1 & Unterstüzung der LEON3-\ac{dsu}\\
   \hline
   fpu & - & Beinhaltet die \ac{fpu}. Diese ist für die Großzahl an Systemen dringend empfohlen.
-   Hierbei kann zwischen der GRFPU und der GRFPU ausgewählt werden. Diese unterscheiden sich in Geschwindigkeit und benötigter Flächenanforderung.\\
+   Hierbei kann zwischen der GRFPU und der GRFPU-Lite ausgewählt werden. Diese unterscheiden sich in Geschwindigkeit und benötigter Flächenanforderung.\\
   \hline
   V8 & 2 & Unterstützung für SPRAC V8 MUL/DIV Instruktionen mit einer 5-Zyklen-Multiplikation. Bei geeigneter Zieltechnologie, benötigt eine Single-Zyklen-Multiplikation weniger Platz und bietet mehr Leistung\\
   \hline
@@ -1047,7 +1052,7 @@ Durch die vorherigen Schritte wurde eine „Allzweck-Konfiguration“ vorgenomme
   \hline
   itlbnum/dtlbnum & 8 & Jeweils acht Einträge für Look-a-Side-Puffer für Befehls- und Datentranslation der \ac{mmu}\\
   \hline
-  tlb\_type & 2 & Nutzung von zwei separaten Look-a-Side Puffers mit schnellem Schreiben für Daten und Befehle\\
+  tlb\_type & 2 & Nutzung von zwei separaten Look-a-Side Puffern mit schnellem Schreiben für Daten und Befehle\\
   \hline
   tlb\_rep & 0 & Nutzen von LRU für die \ac{tlb}\\
   \hline
@@ -1093,7 +1098,7 @@ make vivado
 
 
 
-Das erstellte Bitfile wird anschließend mittels des Hardwaremanagers von Vivado auf das Board geladen und gebootet.\\
+Das erstellte Bitfile wird anschließend mittels des Hardwaremanagers von Vivado auf das Board geladen.\\
 
 
 
@@ -1215,8 +1220,8 @@ Das bereits angesprochen LINUXBUILD-Paket kann unter \url{https://www.gaisler.co
 Nachdem mit Hilfe des Terminals in den entsprechenden Ordner navigiert wurde, kann durch verschiedene Aufrufe das Konfigurationsmenü aufgerufen werden.
 
 \begin{itemize}
-\item make config: Qt basiert \acs{gui} (benötigt Qt-3/4 Bibliotheken)
-\item make gconfig: \ac{gtk} basierte \ac{gui}
+\item make config: Qt basierte \acs{gui} (benötigt Qt-3/4 Bibliotheken)
+\item make gconfig: \ac{gui} aufbauend auf \ac{gtk}
 \item make menuconfig: Ncurses basiertes Terminal Interface
 \end{itemize}
 
@@ -1224,7 +1229,7 @@ Nachdem mit Hilfe des Terminals in den entsprechenden Ordner navigiert wurde, ka
 
 Der Menüpunkt „Install Linux“ führt letztendlich zur Installation des Images.
  Das doppelte Klicken auf den Unterpunkt „Execute Linux installation of latest stable leon-linux“ wählt hierbei immer die letzte stabile Version aus, welche extra für das LEON3-System konfiguriert ist. \\
-Das im Anschluss sich öffnende Pop-Up-Fenster kann mit „Yes“ bestätigt werden und die Installation wird gestartet.
+Das sich im Anschluss öffnende Pop-Up-Fenster kann mit „Yes“ bestätigt werden und die Installation wird gestartet.
 Es gilt zu beachten, dass die Installation nicht mit einem Fehler beendet wird und reibungslos durchläuft. Das Fenster kann mit der \emph{Return}-Taste geschlossen werden.\\
 
 Der Pfad, zu der im vorherigen Schritt installierten Toolchain, muss jetzt im Linuxbuild angegeben werden.
@@ -1238,9 +1243,9 @@ Dies ist in dem Menüpunkt \emph{Step 2:package configuration} und dem Unterpunk
 \end{figure}
 
 Der letzte Schritt ist das Erzeugen des Images. Unter dem Punkt „Step3: build“ kann die eigentliche Erzeugung über „Execute make build“ angestoßen werden. Auch hier kann das erscheinende Fenster mit „Yes“ bestätigt werden.\\
-Wurde das Image erfolgreich erstellt, kann das Fenster sowie \emph{xconfig} geschlossen werden und folgende Dateien befinden sich im Verzeichnis \emph{\~/output/images}.\\
+Wurde das Image erfolgreich erstellt, kann das Fenster sowie \emph{xconfig} geschlossen werden und folgende Dateien befinden sich im Verzeichnis \emph{\textasciitilde/output/images}.\\
 \begin{itemize}
-\item image.ram: RAM Image(Zum Laden und Ausführen oder zum Nutzen des Bootloaders)
+\item image.ram: RAM Image (Zum Laden und Ausführen oder zum Nutzen des Bootloaders)
 \item image: Virtuelles Adressen Image mit Symbolen (Debugging)
 \end{itemize}
 
@@ -1260,7 +1265,7 @@ Das erstellte Image kann nun mit Hilfe des \emph{GRMON} auf das Zielsystem gelad
 \label{fig:toolchainconf}
 \end{figure}
 
-Nach dem der Ladevorgang erfolgreich abgeschlossen wurde, kann das Image mit Hilfe des folgenden Befehls ausgeführt werden.\\
+Nachdem der Ladevorgang erfolgreich abgeschlossen wurde, kann das Image mit Hilfe des folgenden Befehls ausgeführt werden.\\
 
 \begin{lstlisting}[caption={Ausführen des Image},label={code:linuxrun}]
 run
